@@ -496,10 +496,12 @@ header.sticky {
 }
 
 .about-content {
-    display: grid;
-    grid-template-columns: 1fr 1.5fr;
-    gap: 80px;
+    /* Fixed Universal Layout */
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    gap: 40px;
+    text-align: center;
 }
 
 .about-img {
@@ -508,9 +510,12 @@ header.sticky {
 
 .about-img img {
     width: 100%;
-    max-width: 450px;
+    max-width: 350px;
+    /* Standardized Size */
     border-radius: 10px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    margin: 0 auto;
+    display: block;
 }
 
 .about-text {
@@ -1049,61 +1054,86 @@ footer {
         gap: 20px;
     }
 
-    /* Portfolio Mobile */
-    .portfolio-filters {
-        gap: 10px;
-        flex-wrap: wrap;
-        justify-content: center;
-        padding: 0 10px;
+    .timeline-item {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding-left: 50px !important;
+        padding-right: 15px !important;
+        margin-bottom: 20px;
     }
 
-    .filter-btn {
-        padding: 8px 16px;
-        font-size: 0.85rem;
-        white-space: nowrap;
+    .timeline-item.left,
+    .timeline-item.right {
+        left: 0 !important;
+        text-align: left !important;
     }
 
-    .projects-content {
-        grid-template-columns: 1fr;
-        gap: 20px;
+    .timeline-item::after {
+        left: 11px !important;
+        width: 18px;
+        height: 18px;
     }
 
-    /* About Mobile */
-    .about-content {
-        grid-template-columns: 1fr;
-        gap: 30px;
+    .timeline-item.left::after,
+    .timeline-item.right::after {
+        left: 11px !important;
     }
 
-    .about-img {
-        text-align: center;
+    .timeline-content {
+        padding: 15px;
     }
 
-    .about-img img {
-        max-width: 300px;
+    .timeline-date {
+        font-size: 0.8rem;
+        padding: 4px 10px;
     }
 
+    .timeline-title {
+        font-size: 1.1rem;
+    }
+
+    .timeline-subtitle {
+        font-size: 0.9rem;
+    }
+
+    .timeline-description {
+        font-size: 0.9rem;
+    }
+
+    /* Skills Fixes */
     .skills-progress {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
+        grid-template-columns: repeat(3, 1fr);
+        /* Accommodate smaller icons */
+        gap: 15px;
     }
 
     .skill-circle svg {
-        width: 100px;
-        height: 100px;
-    }
-
-    .skill-bg,
-    .skill-fill {
-        r: 40;
+        width: 75px !important;
+        height: 75px !important;
     }
 
     .circle-box {
-        width: 100px;
-        height: 100px;
+        width: 75px !important;
+        height: 75px !important;
     }
 
-    .skill-icon-center {
-        font-size: 2rem;
+    .skill-icon-center,
+    .skill-icon-center i {
+        font-size: 20px !important;
+    }
+
+    /* About Fixes */
+    .about-text {
+        text-align: center !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
+    .about-img img {
+        margin: 0 auto 20px auto !important;
+        display: block !important;
+        width: 70% !important;
     }
 }
 
@@ -1279,6 +1309,8 @@ footer {
 
     .timeline-item {
         width: 100% !important;
+        max-width: 100% !important;
+        /* Added Fix */
         padding-left: 50px !important;
         padding-right: 15px !important;
         margin-bottom: 20px;
@@ -1320,6 +1352,49 @@ footer {
 
     .timeline-description {
         font-size: 0.9rem;
+    }
+
+    /* Skills Fixes (Explicit for <480px) */
+    .skills-progress {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 10px !important;
+    }
+
+    .skill-circle svg {
+        width: 75px !important;
+        height: 75px !important;
+    }
+
+    .circle-box {
+        width: 75px !important;
+        height: 75px !important;
+    }
+
+    .skill-icon-center,
+    .skill-icon-center i {
+        font-size: 20px !important;
+    }
+
+    /* About Fixes (Explicit for <480px) */
+    .about-content {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 20px !important;
+    }
+
+    .about-text {
+        text-align: center !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
+    .about-img img {
+        width: 70% !important;
+        max-width: 250px !important;
+        height: auto !important;
+        margin: 0 auto 20px auto !important;
+        display: block !important;
     }
 
     /* Education Section */
@@ -1652,6 +1727,7 @@ footer {
         border: 2px solid var(--primary-color);
     }
 }
+
 /* Success Modal Styles */
 .modal {
     display: none;
@@ -1699,8 +1775,15 @@ footer {
 }
 
 @keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
 }
 
 .modal-content h3 {
