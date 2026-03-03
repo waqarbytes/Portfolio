@@ -408,9 +408,51 @@
         <i class="fab fa-whatsapp"></i>
     </a>
 
+    <!-- ======== AI CHAT ASSISTANT ======== -->
+    <!-- Chat toggle button -->
+    <button class="chat-fab" id="chatBtn" aria-label="Open AI Assistant">
+        <i class="fas fa-robot chat-icon-open"></i>
+        <i class="fas fa-times chat-icon-close"></i>
+        <span class="chat-badge">AI</span>
+    </button>
+
+    <!-- Chat panel -->
+    <div class="chat-panel" id="chatPanel">
+        <div class="chat-header">
+            <div class="chat-header-left">
+                <div class="chat-avatar-lg">W</div>
+                <div>
+                    <p class="chat-header-name">Waqar's AI Assistant</p>
+                    <p class="chat-header-status"><span class="chat-online-dot"></span> Online</p>
+                </div>
+            </div>
+            <button class="chat-close-btn" id="chatClose" aria-label="Close chat">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="chat-body" id="chatBody"></div>
+
+        <div class="chat-footer">
+            <input
+                type="text"
+                id="chatInput"
+                class="chat-input"
+                placeholder="Ask me about Waqar..."
+                autocomplete="off"
+                maxlength="500"
+            />
+            <button class="chat-send-btn" id="chatSend" aria-label="Send">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+    <!-- ======== END AI CHAT ASSISTANT ======== -->
+
     <script src="script.js"></script>
     <script src="contact.js"></script>
     <script src="animations.js"></script>
+    <script src="chatbot.js"></script>
 </body>
 
 </html>
