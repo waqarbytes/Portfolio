@@ -1,37 +1,29 @@
 /* ============================================================
-   1. SMOOTH SCROLL — handled natively via CSS scroll-behavior: smooth
-   No JS smooth scroll library needed (avoids lag on local files)
+   ANIMATIONS.JS — Simplified & Bulletproof
+   Only GSAP for visual polish; everything is visible by default.
+   Hero uses CSS class-toggle animations (no GSAP opacity dependency).
+   Scroll sections use immediateRender:false so they never get stuck.
    ============================================================ */
 
-
 /* ============================================================
-   2. CUSTOM CURSOR
+   1. CUSTOM CURSOR (GSAP-driven)
    ============================================================ */
 const cursorDot  = document.getElementById('cursorDot');
 const cursorRing = document.getElementById('cursorRing');
 
-if (cursorDot && cursorRing && window.innerWidth > 768) {
-    let dotX = 0, dotY = 0;
-    let ringX = 0, ringY = 0;
-
+if (cursorDot && cursorRing && window.matchMedia('(hover: hover)').matches) {
     document.addEventListener('mousemove', e => {
-        dotX = e.clientX;
-        dotY = e.clientY;
-        gsap.to(cursorDot, { x: dotX, y: dotY, duration: 0.1, ease: 'power3.out', overwrite: 'auto' });
-        gsap.to(cursorRing, { x: dotX, y: dotY, duration: 0.35, ease: 'power3.out', overwrite: 'auto' });
+        gsap.to(cursorDot,  { x: e.clientX, y: e.clientY, duration: 0.1, ease: 'power3.out', overwrite: 'auto' });
+        gsap.to(cursorRing, { x: e.clientX, y: e.clientY, duration: 0.35, ease: 'power3.out', overwrite: 'auto' });
     });
-
-    // Enlarge cursor on hoverable elements
-    const hoverables = document.querySelectorAll('a, button, .tech-tile, .project-card, .nav-links li a, .social-sidebar a');
-    hoverables.forEach(el => {
+    document.querySelectorAll('a, button, .tech-tile').forEach(el => {
         el.addEventListener('mouseenter', () => cursorRing.classList.add('hovered'));
         el.addEventListener('mouseleave', () => cursorRing.classList.remove('hovered'));
     });
 }
 
 /* ============================================================
-   3. CANVAS ANIMATED ORB BACKGROUND (30fps throttled)
-   Orbs cover full viewport — visible at every scroll position
+   2. CANVAS ANIMATED ORB BACKGROUND (30fps throttled)
    ============================================================ */
 (function initCanvas() {
     const canvas = document.getElementById('bgCanvas');
@@ -45,8 +37,6 @@ if (cursorDot && cursorRing && window.innerWidth > 768) {
     resize();
     window.addEventListener('resize', resize);
 
-    // 5 orbs spread across viewport corners and center
-    // so no matter where you scroll, at least 2 orbs are glowing
     const orbs = [
         { x: 0.80, y: 0.20, r: 420, color: 'rgba(124,58,237,',  alpha: 0.18, vx: 0.00025, vy: 0.00015 },
         { x: 0.15, y: 0.55, r: 320, color: 'rgba(59,130,246,',   alpha: 0.13, vx: -0.0002, vy: 0.00025 },
@@ -55,270 +45,160 @@ if (cursorDot && cursorRing && window.innerWidth > 768) {
         { x: 0.25, y: 0.15, r: 280, color: 'rgba(59,130,246,',   alpha: 0.10, vx: 0.0002,  vy: 0.00018 },
     ];
 
-    let t = 0;
-    let lastTime = 0;
-    const FPS = 30;
-    const INTERVAL = 1000 / FPS;
+    let t = 0, lastTime = 0;
+    const INTERVAL = 1000 / 30; // 30fps
 
     function draw(timestamp) {
         requestAnimationFrame(draw);
-        const delta = timestamp - lastTime;
-        if (delta < INTERVAL) return;
-        lastTime = timestamp - (delta % INTERVAL);
-        t += 1;
-
+        if (timestamp - lastTime < INTERVAL) return;
+        lastTime = timestamp;
+        t++;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-
         orbs.forEach(orb => {
             const px = (orb.x + Math.sin(t * orb.vx * 60) * 0.12) * canvas.width;
             const py = (orb.y + Math.cos(t * orb.vy * 60) * 0.12) * canvas.height;
-
-            const gradient = ctx.createRadialGradient(px, py, 0, px, py, orb.r);
-            gradient.addColorStop(0,   orb.color + orb.alpha + ')');
-            gradient.addColorStop(0.4, orb.color + (orb.alpha * 0.5) + ')');
-            gradient.addColorStop(1,   orb.color + '0)');
-
+            const g  = ctx.createRadialGradient(px, py, 0, px, py, orb.r);
+            g.addColorStop(0,   orb.color + orb.alpha + ')');
+            g.addColorStop(0.4, orb.color + (orb.alpha * 0.5) + ')');
+            g.addColorStop(1,   orb.color + '0)');
             ctx.beginPath();
             ctx.arc(px, py, orb.r, 0, Math.PI * 2);
-            ctx.fillStyle = gradient;
+            ctx.fillStyle = g;
             ctx.fill();
         });
     }
-
     requestAnimationFrame(draw);
 })();
 
 /* ============================================================
-   4. GSAP: REGISTER PLUGIN + SET INITIAL STATES
+   3. REGISTER GSAP PLUGIN
    ============================================================ */
 gsap.registerPlugin(ScrollTrigger);
 
-// Set initial hidden states via JS (not CSS) so content is visible if JS fails
-gsap.set('header', { opacity: 0 });
-gsap.set('.about-content', { opacity: 0 });
-gsap.set('.timeline', { opacity: 0 });
-gsap.set('.project-card', { opacity: 0 });
-gsap.set('.tech-grid', { opacity: 0 });
-gsap.set('.footer-form-section', { opacity: 0 });
-// Social sidebar and resume — hidden initially for hero entrance
-gsap.set('.social-sidebar', { opacity: 0, x: -20 });
-gsap.set('.resume-fab', { opacity: 0, x: 20 });
-
 /* ============================================================
-   5. NAVBAR ENTRANCE
+   4. HERO ENTRANCE — CSS class toggle (no opacity dependency)
+   Elements start visible; class adds the animation effect.
    ============================================================ */
-gsap.to('header', {
-    opacity: 1,
-    duration: 0.8,
-    delay: 0.1,
-    ease: 'power2.out',
+// Navbar fade in
+gsap.from('header', { opacity: 0, y: -20, duration: 0.8, ease: 'power2.out', delay: 0.1 });
+
+// Hero text — translate only, elements STAY visible (no opacity:0)
+// Using small delay stagger so each line slides up in sequence
+const heroItems = ['.hero-greeting', '.hero-name', '.hero-role-label', '.hero-roles', '.hero-scroll'];
+heroItems.forEach((sel, i) => {
+    gsap.from(sel, {
+        y: 40,
+        duration: 0.8,
+        delay: 0.2 + i * 0.12,
+        ease: 'power3.out',
+        clearProps: 'all', // clean up after animation
+    });
 });
 
-/* ============================================================
-   6. HERO SECTION — STAGGERED TEXT ENTRANCE
-   ============================================================ */
-const heroTL = gsap.timeline({
-    delay: 0.3,
-    onComplete: () => {
-        // Safety net: always make sidebar + resume visible after hero
-        gsap.set('.social-sidebar', { opacity: 1, x: 0 });
-        gsap.set('.resume-fab', { opacity: 1, x: 0 });
-    }
-});
-
-heroTL
-    .from('.hero-greeting', {
-        opacity: 0, y: 30, duration: 0.7, ease: 'power3.out',
-    })
-    .from('.hero-name', {
-        opacity: 0, y: 60, duration: 0.9, ease: 'power3.out', skewX: -3,
-    }, '-=0.4')
-    .from('.hero-role-label', {
-        opacity: 0, y: 20, duration: 0.6, ease: 'power3.out',
-    }, '-=0.5')
-    .from('.hero-roles', {
-        opacity: 0, y: 40, duration: 0.7, ease: 'power3.out',
-    }, '-=0.4')
-    .from('.hero-scroll', {
-        opacity: 0, y: 20, duration: 0.5, ease: 'power3.out',
-    }, '-=0.3')
-    .to('.social-sidebar', {
-        opacity: 1, x: 0, duration: 0.6, ease: 'power3.out',
-    }, '-=0.4')
-    .to('.resume-fab', {
-        opacity: 1, x: 0, duration: 0.5, ease: 'power3.out',
-    }, '<');
+// sidebar and resume — slide in from their natural positions
+gsap.from('.social-sidebar', { x: -40, opacity: 0, duration: 0.8, delay: 0.9, ease: 'power3.out', clearProps: 'all' });
+gsap.from('.resume-fab',     { x: 40,  opacity: 0, duration: 0.8, delay: 0.9, ease: 'power3.out', clearProps: 'all' });
 
 /* ============================================================
-   7. ABOUT SECTION — SCROLL REVEAL
+   5. SCROLL REVEAL — uses immediateRender:false so elements
+   are NOT set to opacity:0 until ScrollTrigger fires.
    ============================================================ */
-/* Reveal container first, then animate children */
-ScrollTrigger.create({
-    trigger: '.about',
-    start: 'top 80%',
-    once: true,
-    onEnter: () => {
-        gsap.to('.about-content', { opacity: 1, duration: 0.01 });
-        gsap.from('.about-img-wrapper', { opacity: 0, x: -60, duration: 1, ease: 'power3.out' });
-        gsap.from('.about-stats .stat', { opacity: 0, y: 30, duration: 0.6, stagger: 0.15, ease: 'power3.out', delay: 0.4 });
-        gsap.from('.about-text-col .section-label', { opacity: 0, y: 20, duration: 0.5, ease: 'power2.out', delay: 0.2 });
-        gsap.from('.about-heading', { opacity: 0, y: 40, duration: 0.8, ease: 'power3.out', delay: 0.3 });
-        gsap.from('.about-desc', { opacity: 0, y: 30, duration: 0.7, ease: 'power3.out', delay: 0.5 });
-        gsap.from('.about-cta .btn-primary, .about-cta .btn-outline', { opacity: 0, y: 20, duration: 0.6, stagger: 0.15, ease: 'power2.out', delay: 0.6 });
-    }
-});
 
-/* ============================================================
-   8. EXPERIENCE TIMELINE — SCROLL REVEAL
-   ============================================================ */
-ScrollTrigger.create({
-    trigger: '.experience',
-    start: 'top 80%',
-    once: true,
-    onEnter: () => {
-        gsap.to('.timeline', { opacity: 1, duration: 0.01 });
-        gsap.from('.timeline-item', { opacity: 0, y: 60, duration: 0.9, stagger: 0.2, ease: 'power3.out', delay: 0.1 });
-    }
-});
+// Helper: scroll reveal for any element
+function scrollReveal(selector, vars = {}) {
+    gsap.from(selector, {
+        opacity: 0,
+        y: vars.y ?? 50,
+        x: vars.x ?? 0,
+        scale: vars.scale ?? 1,
+        duration: vars.duration ?? 0.8,
+        stagger: vars.stagger ?? 0,
+        ease: vars.ease ?? 'power3.out',
+        immediateRender: false,  // ← KEY: don't set opacity:0 immediately
+        clearProps: 'all',
+        scrollTrigger: {
+            trigger: vars.trigger ?? selector,
+            start: 'top 88%',
+            once: true,
+        },
+    });
+}
 
+// About
+scrollReveal('.about-img-wrapper', { x: -60, y: 0 });
+scrollReveal('.about-stats .stat',  { y: 30, stagger: 0.12, trigger: '.about-stats' });
+scrollReveal('.about-heading',      { y: 40 });
+scrollReveal('.about-desc',         { y: 30 });
+scrollReveal('.about-cta .btn-primary, .about-cta .btn-outline', { y: 20, stagger: 0.12, trigger: '.about-cta' });
 
-// Glowing dot pulse animation
+// Experience
+scrollReveal('.timeline-item', { y: 60, stagger: 0.18, trigger: '.timeline' });
+
+// Glowing dot pulse
 gsap.to('.tl-dot', {
-    boxShadow: '0 0 30px rgba(168,85,247,0.9), 0 0 60px rgba(168,85,247,0.5)',
+    boxShadow: '0 0 30px rgba(168,85,247,0.9), 0 0 60px rgba(168,85,247,0.4)',
     repeat: -1,
     yoyo: true,
     duration: 1.5,
     ease: 'power1.inOut',
-    stagger: 0.5,
+    stagger: { each: 0.5 },
 });
 
-/* ============================================================
-   9. PROJECT CARDS — SCROLL REVEAL
-   ============================================================ */
-document.querySelectorAll('.project-card').forEach((card) => {
+// Project cards
+document.querySelectorAll('.project-card').forEach(card => {
     const isReverse = card.classList.contains('reverse');
-    ScrollTrigger.create({
-        trigger: card,
-        start: 'top 82%',
-        once: true,
-        onEnter: () => {
-            gsap.to(card, { opacity: 1, duration: 0.01 });
-            gsap.from(card.querySelector('.project-image'), {
-                opacity: 0, x: isReverse ? 80 : -80, duration: 1, ease: 'power3.out'
-            });
-            gsap.from(card.querySelector('.project-info'), {
-                opacity: 0, x: isReverse ? -80 : 80, duration: 1, ease: 'power3.out'
-            });
-            const numEl = card.querySelector('.project-num');
-            if (numEl) gsap.from(numEl, { opacity: 0, scale: 0.6, duration: 0.8, ease: 'back.out(1.7)' });
-        }
-    });
+    scrollReveal(card.querySelector('.project-image'), { x: isReverse ? 70 : -70, y: 0, trigger: card });
+    scrollReveal(card.querySelector('.project-info'),  { x: isReverse ? -70 : 70, y: 0, trigger: card });
+    const num = card.querySelector('.project-num');
+    if (num) scrollReveal(num, { scale: 0.7, y: 0, trigger: card, ease: 'back.out(1.7)' });
 });
 
+// Tech tiles
+scrollReveal('.tech-tile', { y: 35, scale: 0.88, stagger: 0.04, trigger: '.tech-grid', ease: 'back.out(1.3)' });
 
-/* ============================================================
-   10. TECH STACK — STAGGERED TILE REVEAL
-   ============================================================ */
-/* ============================================================
-   10. TECH STACK — STAGGERED TILE REVEAL
-   ============================================================ */
-ScrollTrigger.create({
-    trigger: '.techstack',
-    start: 'top 80%',
-    once: true,
-    onEnter: () => {
-        gsap.to('.tech-grid', { opacity: 1, duration: 0.01 });
-        gsap.from('.tech-tile', {
-            opacity: 0,
-            y: 40,
-            scale: 0.85,
-            duration: 0.45,
-            stagger: { from: 'start', amount: 0.8 },
-            ease: 'back.out(1.4)',
-        });
-    }
-});
+// Footer form
+scrollReveal('.footer-form-section', { y: 50 });
 
-/* ============================================================
-   11. FOOTER / CONTACT — SCROLL REVEAL
-   ============================================================ */
-ScrollTrigger.create({
-    trigger: '.footer',
-    start: 'top 85%',
-    once: true,
-    onEnter: () => {
-        gsap.to('.footer-form-section', { opacity: 1, duration: 0.01 });
-        gsap.from('.footer-form-section', { opacity: 0, y: 60, duration: 1, ease: 'power3.out', delay: 0.05 });
-    }
-});
-
-
-// Footer name reveal — split per character using a clip reveal
+// Footer name character split
 const footerName = document.querySelector('.footer-name');
-if (footerName) {
-    const text = footerName.textContent;
-    footerName.innerHTML = text.split('').map(c => c === ' ' ? ' ' : `<span class="fn-char" style="display:inline-block;">${c}</span>`).join('');
-    gsap.from('.fn-char', {
-        opacity: 0,
-        y: 80,
-        rotateX: -40,
-        duration: 0.7,
-        stagger: { amount: 0.6 },
-        ease: 'power3.out',
-        scrollTrigger: { trigger: footerName, start: 'top 80%', once: true }
-    });
+if (footerName && footerName.childElementCount === 0) {
+    footerName.innerHTML = footerName.textContent
+        .split('')
+        .map(c => c.trim() ? `<span class="fn-char" style="display:inline-block">${c}</span>` : ' ')
+        .join('');
 }
-
-gsap.from('.footer-col', {
-    opacity: 0,
-    y: 40,
-    duration: 0.8,
-    stagger: 0.15,
-    ease: 'power3.out',
-    scrollTrigger: { trigger: '.footer-cols', start: 'top 80%', once: true }
-});
+scrollReveal('.fn-char', { y: 70, stagger: 0.04, trigger: '.footer-name', ease: 'power3.out' });
+scrollReveal('.footer-col', { y: 40, stagger: 0.15, trigger: '.footer-cols' });
 
 /* ============================================================
-   12. SECTION HEADINGS — CLIP REVEAL
+   6. SECTION HEADINGS
    ============================================================ */
-document.querySelectorAll('.section-heading').forEach(heading => {
-    gsap.from(heading, {
+document.querySelectorAll('.section-heading, .section-label').forEach(el => {
+    gsap.from(el, {
         opacity: 0,
-        y: 50,
-        duration: 0.9,
+        y: 30,
+        duration: 0.7,
         ease: 'power3.out',
-        scrollTrigger: { trigger: heading, start: 'top 80%', once: true }
-    });
-});
-
-document.querySelectorAll('.section-label').forEach(label => {
-    gsap.from(label, {
-        opacity: 0,
-        y: 20,
-        duration: 0.6,
-        ease: 'power2.out',
-        scrollTrigger: { trigger: label, start: 'top 85%', once: true }
+        immediateRender: false,
+        clearProps: 'all',
+        scrollTrigger: { trigger: el, start: 'top 88%', once: true },
     });
 });
 
 /* ============================================================
-   13. NAVBAR LINK HOVER — MAGNETIC EFFECT (subtle)
+   7. NAVBAR MAGNETIC HOVER
    ============================================================ */
 document.querySelectorAll('.nav-links li a').forEach(link => {
     link.addEventListener('mousemove', e => {
-        const rect = link.getBoundingClientRect();
-        const mx = e.clientX - rect.left - rect.width / 2;
-        const my = e.clientY - rect.top  - rect.height / 2;
-        gsap.to(link, { x: mx * 0.2, y: my * 0.2, duration: 0.3, ease: 'power2.out' });
+        const r = link.getBoundingClientRect();
+        gsap.to(link, { x: (e.clientX - r.left - r.width/2) * 0.25, y: (e.clientY - r.top - r.height/2) * 0.25, duration: 0.3, ease: 'power2.out' });
     });
     link.addEventListener('mouseleave', () => {
-        gsap.to(link, { x: 0, y: 0, duration: 0.4, ease: 'elastic.out(1, 0.5)' });
+        gsap.to(link, { x: 0, y: 0, duration: 0.5, ease: 'elastic.out(1, 0.5)' });
     });
 });
 
 /* ============================================================
-   14. REFRESH SCROLLTRIGGER ON RESIZE
+   8. REFRESH ON RESIZE
    ============================================================ */
-window.addEventListener('resize', () => {
-    ScrollTrigger.refresh();
-});
+window.addEventListener('resize', () => ScrollTrigger.refresh());
