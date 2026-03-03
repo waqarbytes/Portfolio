@@ -428,7 +428,7 @@ header.scrolled {
 }
 
 .nav-links li a {
-    font-size: 0.78rem;
+    font-size: 0.88rem;
     font-weight: 600;
     color: var(--muted);
     letter-spacing: 2px;
@@ -489,13 +489,13 @@ header.scrolled {
 }
 
 .social-sidebar a {
-    width: 36px;
-    height: 36px;
+    width: 42px;
+    height: 42px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--muted);
-    font-size: 1rem;
+    font-size: 1.25rem;
     transition: all 0.3s ease;
 }
 
