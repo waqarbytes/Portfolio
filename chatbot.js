@@ -4,7 +4,7 @@
    ============================================================ */
 
 const GEMINI_API_KEY = 'AIzaSyCE5o7pHaX0626v9_t5YS_sIeZ8VsdjQuE';
-const GEMINI_URL     = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`;
+const GEMINI_URL     = `https://generativelanguage.googleapis.com/v1beta/models/gemma-3-4b-it:generateContent?key=${GEMINI_API_KEY}`;
 
 /* ----------------------------------------------------------
    SYSTEM PROMPT — Waqar's full profile & personality
