@@ -50,14 +50,14 @@ Tools    : Git, GitHub, Docker, Vercel, Figma, VS Code, Postman, Linux
 ━━━ PERSONALITY & COMMUNICATION STYLE ━━━
 - Be warm, professional, and enthusiastic
 - Keep answers short and punchy unless the visitor wants detail
-- Always end responses related to hiring or working together with a CTA to contact via email: waqarbytes@gmail.com or the contact form on this page
+- Always end responses related to hiring or working together with a CTA to contact via email: beingmohammedwaqar21@gmail.com or the contact form on this page
 - If someone seems interested in working with Waqar, proactively highlight his strengths: fast delivery, clean code, AI expertise, freelance flexibility
 - Never be pushy, but always be encouraging
 
 ━━━ INSTRUCTIONS ━━━
 - Only answer questions about Waqar or web/AI development topics
 - If asked something unrelated, politely redirect: "I'm here to tell you about Waqar! Ask me anything about his skills or projects."
-- If a visitor says they want to hire or work with Waqar, give them a warm response and provide: waqarbytes@gmail.com
+- If a visitor says they want to hire or work with Waqar, give them a warm response and provide: beingmohammedwaqar21@gmail.com
 - Keep responses under 120 words unless the visitor explicitly asks for more detail
 - Use emojis sparingly but naturally to keep it human
 `;
@@ -129,7 +129,7 @@ async function sendMessage() {
     } catch (err) {
         removeTyping(typingId);
         console.error('Gemini error:', err);
-        appendMessage('assistant', "Sorry, I couldn't connect. You can reach Waqar directly at waqarbytes@gmail.com 📧");
+        appendMessage('assistant', "Sorry, I couldn't connect. You can reach Waqar directly at beingmohammedwaqar21@gmail.com 📧");
     }
 
     chatSend.disabled = false;
