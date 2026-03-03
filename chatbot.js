@@ -4,7 +4,7 @@
    ============================================================ */
 
 const GEMINI_API_KEY = 'AIzaSyCE5o7pHaX0626v9_t5YS_sIeZ8VsdjQuE';
-const GEMINI_URL     = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${GEMINI_API_KEY}`;
+const GEMINI_URL     = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
 
 /* ----------------------------------------------------------
    SYSTEM PROMPT — Waqar's full profile & personality
@@ -128,8 +128,8 @@ async function sendMessage() {
         history.push({ role: 'model', parts: [{ text: reply }] });
     } catch (err) {
         removeTyping(typingId);
-        appendMessage('assistant', "Sorry, I'm having a little trouble connecting right now. You can reach Waqar directly at waqarbytes@gmail.com 📧");
         console.error('Gemini error:', err);
+        appendMessage('assistant', "Sorry, I couldn't connect. You can reach Waqar directly at waqarbytes@gmail.com 📧");
     }
 
     chatSend.disabled = false;
@@ -165,7 +165,11 @@ async function callGemini() {
         body   : JSON.stringify(body),
     });
 
-    if (!res.ok) throw new Error(`Gemini API error: ${res.status}`);
+    if (!res.ok) {
+        const errText = await res.text();
+        console.error('Gemini API response:', res.status, errText);
+        throw new Error(`Gemini API error: ${res.status} — ${errText}`);
+    }
 
     const data = await res.json();
     return data.candidates?.[0]?.content?.parts?.[0]?.text ?? "Hmm, I didn't catch that. Could you rephrase?";
