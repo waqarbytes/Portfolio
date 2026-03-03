@@ -14,15 +14,6 @@
     const barEl     = document.getElementById('loaderBar');
     if (!preloader) return;
 
-    // Only show preloader ONCE per browser session
-    if (sessionStorage.getItem('portfolioLoaded')) {
-        preloader.style.display = 'none';
-        document.body.style.overflow = '';
-        fireHeroAnimations();
-        return;
-    }
-    sessionStorage.setItem('portfolioLoaded', '1');
-
     document.body.style.overflow = 'hidden';
 
     let current = 0;
