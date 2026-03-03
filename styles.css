@@ -1500,7 +1500,7 @@ header.scrolled {
 .chat-fab {
     position: fixed;
     bottom: 30px;
-    left: 30px;
+    right: 100px;
     width: 56px;
     height: 56px;
     border-radius: 50%;
@@ -1548,7 +1548,7 @@ header.scrolled {
 .chat-panel {
     position: fixed;
     bottom: 100px;
-    left: 30px;
+    right: 30px;
     width: 360px;
     max-height: 520px;
     background: rgba(10, 8, 18, 0.95);
@@ -1785,6 +1785,6 @@ header.scrolled {
 
     .chat-fab {
         bottom: 20px;
-        left: 20px;
+        right: 80px;
     }
 }
