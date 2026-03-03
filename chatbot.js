@@ -129,7 +129,7 @@ async function sendMessage() {
     } catch (err) {
         removeTyping(typingId);
         console.error('Gemini error:', err);
-        appendMessage('assistant', `⚠️ Error: ${err.message}`);
+        appendMessage('assistant', "Sorry, I'm having a little trouble right now. You can reach Waqar directly at beingmohammedwaqar21@gmail.com 📧");
     }
 
     chatSend.disabled = false;
