@@ -4,340 +4,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mohd Waqar - Web Developer Portfolio</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <link rel="stylesheet" href="styles.css?v=2.1">
+    <title>Mohd Waqar — Web Developer & AI/ML Enthusiast</title>
+    <meta name="description" content="Portfolio of Mohd Waqar, a Full-Stack Web Developer and AI/ML enthusiast based in India.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- GSAP Animation Engine -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <link rel="icon" type="image/png" href="44.png">
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <!-- Header & Navigation -->
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- Animated Canvas Background -->
+    <canvas id="bgCanvas"></canvas>
+
+    <!-- Navbar -->
     <header id="header">
-        <div class="navbar">
-            <div class="logo">
-                <a href="#">Mohd Waqar</a>
+        <nav class="navbar">
+            <div class="nav-logo">
+                <a href="#home">MW /&gt;</a>
             </div>
-            <ul class="menu" id="menu">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#contact">Contact</a></li>
+            <div class="nav-email">
+                <a href="mailto:beingmohammedwaqar21@gmail.com">beingmohammedwaqar21@gmail.com</a>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#about">ABOUT</a></li>
+                <li><a href="#work">WORK</a></li>
+                <li><a href="#contact">CONTACT</a></li>
             </ul>
-            <div class="menu-btn" id="menu-btn">
-                <i class="fas fa-bars"></i>
-            </div>
-        </div>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </nav>
     </header>
+
+    <!-- Left Social Sidebar -->
+    <aside class="social-sidebar">
+        <a href="https://github.com/waqarbytes" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <i class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/mohammed-waqar-156030217/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a href="https://twitter.com/waqarbytes" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+            <i class="fab fa-twitter"></i>
+        </a>
+        <a href="mailto:beingmohammedwaqar21@gmail.com" aria-label="Email">
+            <i class="fas fa-envelope"></i>
+        </a>
+        <div class="sidebar-line"></div>
+    </aside>
+
+    <!-- Resume FAB -->
+    <a href="resumewaqar.pdf" class="resume-fab" target="_blank" rel="noopener noreferrer">
+        RESUME <i class="fas fa-file-alt"></i>
+    </a>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text" data-aos="fade-up" data-aos-duration="1000">
-                    <p class="hero-greeting">Hi, I'm</p>
-                    <h1><span class="hero-name">Mohd Waqar</span></h1>
-                    <h2 class="hero-title">Web Developer & AI/ML Enthusiast</h2>
-
-                    <div class="social-icons">
-                        <a href="https://www.linkedin.com/in/mohammed-waqar-156030217/" aria-label="LinkedIn"><i
-                                class="fab fa-linkedin-in"></i></a>
-                        <a href="https://github.com/waqarbytes" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                        <a href="mailto:beingmohammedwaqar21@gmail.com" aria-label="Email"><i
-                                class="fas fa-envelope"></i></a>
-                        <a href="https://twitter.com/waqarbytes" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                    </div>
-
-                    <div class="hero-btns">
-                        <a href="#contact" class="btn btn-hire">Hire Me</a>
-                        <a href="resumewaqar.pdf" class="btn btn-secondary">Download CV</a>
-                    </div>
-                </div>
-
-                <div class="hero-image" data-aos="fade-left" data-aos-duration="1000">
-                    <img src="pho.jpeg" alt="Mohd Waqar">
-                </div>
+        <div class="hero-orb hero-orb-1"></div>
+        <div class="hero-orb hero-orb-2"></div>
+        <div class="hero-content">
+            <p class="hero-greeting">Hello! I'm</p>
+            <h1 class="hero-name">MOHD WAQAR</h1>
+            <p class="hero-role-label">A</p>
+            <div class="hero-roles">
+                <span class="role-text" id="heroRole">WEB DEVELOPER</span>
             </div>
-
-            <div class="hero-stats" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
-                <div class="stat-item">
-                    <h3>3+</h3>
-                    <p>Internships</p>
-                </div>
-                <div class="stat-item">
-                    <h3>15+</h3>
-                    <p>Projects Completed</p>
-                </div>
-                <div class="stat-item">
-                    <h3>50+</h3>
-                    <p>GitHub Contributions</p>
-                </div>
+        </div>
+        <div class="hero-scroll">
+            <div class="scroll-icon">
+                <i class="fas fa-mouse"></i>
             </div>
+            <span>Scroll Down</span>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section class="services" id="services">
-        <div class="container">
-            <h2 class="section-title">My Services</h2>
-            <p class="section-subtitle">Offering comprehensive web development and AI/ML solutions to bring your ideas
-                to life</p>
-
-            <div class="services-content">
-                <div class="service-card" data-aos="zoom-in" data-aos-duration="800">
-                    <div class="service-icon">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <h3 class="service-title">Frontend Development</h3>
-                    <p class="service-description">Building responsive and interactive user interfaces using HTML, CSS,
-                        JavaScript, React, and modern frameworks.</p>
-                </div>
-
-                <div class="service-card" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="100">
-                    <div class="service-icon">
-                        <i class="fas fa-server"></i>
-                    </div>
-                    <h3 class="service-title">Backend Development</h3>
-                    <p class="service-description">Creating robust server-side applications with PHP, Node.js, SQL
-                        databases, and RESTful APIs.</p>
-                </div>
-
-                <div class="service-card" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="200">
-                    <div class="service-icon">
-                        <i class="fas fa-laptop-code"></i>
-                    </div>
-                    <h3 class="service-title">Full-Stack Development</h3>
-                    <p class="service-description">End-to-end web application development from database design to user
-                        interface implementation.</p>
-                </div>
-
-                <div class="service-card" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="300">
-                    <div class="service-icon">
-                        <i class="fas fa-robot"></i>
-                    </div>
-                    <h3 class="service-title">AI/ML Solutions</h3>
-                    <p class="service-description">Implementing machine learning models and AI-powered features using
-                        Python and modern ML libraries.</p>
-                </div>
-
-                <div class="service-card" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="400">
-                    <div class="service-icon">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <h3 class="service-title">Responsive Design</h3>
-                    <p class="service-description">Ensuring your website looks perfect on all devices with mobile-first
-                        responsive design principles.</p>
-                </div>
-
-                <div class="service-card" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="500">
-                    <div class="service-icon">
-                        <i class="fas fa-database"></i>
-                    </div>
-                    <h3 class="service-title">Database Management</h3>
-                    <p class="service-description">Designing and optimizing databases with SQL, MongoDB, and
-                        implementing efficient data structures.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects/Portfolio Section -->
-    <section class="projects" id="projects">
-        <div class="container">
-            <h2 class="section-title">Portfolio</h2>
-
-            <div class="portfolio-filters">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="website">Website Design</button>
-                <button class="filter-btn" data-filter="mobile">App Mobile Design</button>
-                <!-- <button class="filter-btn" data-filter="desktop">App Desktop</button> -->
-                <!-- <button class="filter-btn" data-filter="branding">Branding</button> -->
-            </div>
-
-            <div class="projects-content">
-                <a href="https://findaroom.co.nz/" target="_blank" rel="noopener noreferrer" class="project-link">
-                    <div class="project-card" data-aos="fade-up" data-aos-duration="1000" data-category="website">
-                        <div class="project-img">
-                            <img src="2.png" alt="Room Rental Website">
-                        </div>
-                        <div class="project-info">
-                            <h3 class="project-title">Room Rental Website</h3>
-                            <p class="project-category">Full-Stack Web Application</p>
-                        </div>
-                    </div>
-                </a>
-
-                <a href="https://waqarbytes.github.io/Fresh-Bite/" target="_blank" rel="noopener noreferrer"
-                    class="project-link">
-                    <div class="project-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100"
-                        data-category="website">
-                        <div class="project-img">
-                            <img src="1.png" alt="Fresh Bite Catering Website">
-                        </div>
-                        <div class="project-info">
-                            <h3 class="project-title">Fresh Bite Catering</h3>
-                            <p class="project-category">Responsive Website</p>
-                        </div>
-                    </div>
-                </a>
-
-                <a href="https://yojana-dost-6ajqmnvlz-waqarbytes-projects.vercel.app/" target="_blank"
-                    rel="noopener noreferrer" class="project-link">
-                    <div class="project-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200"
-                        data-category="mobile">
-                        <div class="project-img">
-                            <img src="3.png" alt="Yojana Dost">
-                        </div>
-                        <div class="project-info">
-                            <h3 class="project-title">Yojana Dost</h3>
-                            <p class="project-category">AI-Powered Platform</p>
-                        </div>
-                    </div>
-                </a>
-
-                <a href="https://urbanlets.co.nz/" target="_blank" rel="noopener noreferrer" class="project-link">
-                    <div class="project-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300"
-                        data-category="desktop">
-                        <div class="project-img">
-                            <img src="4.png" alt="UrbanLets">
-                        </div>
-                        <div class="project-info">
-                            <h3 class="project-title">UrbanLets</h3>
-                            <p class="project-category">Property Rental Platform</p>
-                        </div>
-                    </div>
-                </a>
-
-                <a href="https://github.com/waqarbytes/insightful-habits" target="_blank" rel="noopener noreferrer"
-                    class="project-link">
-                    <div class="project-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400"
-                        data-category="mobile">
-                        <div class="project-img">
-                            <img src="5.png" alt="Insightful Habits">
-                        </div>
-                        <div class="project-info">
-                            <h3 class="project-title">Insightful Habits</h3>
-                            <p class="project-category">Habit Tracking App</p>
-                        </div>
-                    </div>
-                </a>
-
-                <a href="https://github.com/waqarbytes/reflect-and-thrive" target="_blank" rel="noopener noreferrer"
-                    class="project-link">
-                    <div class="project-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500"
-                        data-category="website">
-                        <div class="project-img">
-                            <img src="6.png" alt="Reflect and Thrive">
-                        </div>
-                        <div class="project-info">
-                            <h3 class="project-title">Reflect & Thrive</h3>
-                            <p class="project-category">Journaling Platform</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Me Section -->
+    <!-- About Section -->
     <section class="about" id="about">
+        <div class="about-orb"></div>
         <div class="container">
-            <h2 class="section-title">About Me</h2>
             <div class="about-content">
-                <div class="about-img" data-aos="fade-right" data-aos-duration="1000">
-                    <img src="pho.jpeg" alt="Mohd Waqar">
+                <div class="about-image-col">
+                    <div class="about-img-wrapper">
+                        <img src="pho.jpeg" alt="Mohd Waqar">
+                    </div>
+                    <div class="about-stats">
+                        <div class="stat">
+                            <span class="stat-number">3+</span>
+                            <span class="stat-label">Internships</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">15+</span>
+                            <span class="stat-label">Projects</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">50+</span>
+                            <span class="stat-label">GitHub Commits</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="about-text" data-aos="fade-left" data-aos-duration="1000">
-                    <p class="about-subtitle">Web Developer & AI/ML Enthusiast</p>
-                    <p class="about-description">I am a passionate web developer and AI/ML enthusiast with a strong
-                        foundation in full-stack development. Currently pursuing my Bachelor's in Computer Engineering
-                        at Baba Ghulam Shah Badshah University, I have gained valuable experience through internships at
-                        Bluestock Fintech, International Data Solution, and Next24Tech. I specialize in creating
-                        responsive, user-friendly web applications and implementing AI-powered solutions that solve
-                        real-world problems.</p>
-
-                    <a href="resumewaqar.pdf" class="btn btn-hire">Download CV</a>
-
-                    <div class="skills-progress">
-                        <div class="skill-circle">
-                            <div class="circle-box">
-                                <svg viewBox="0 0 140 140">
-                                    <circle cx="70" cy="70" r="60" class="skill-bg"></circle>
-                                    <circle cx="70" cy="70" r="60" class="skill-fill" style="--percent: 90"></circle>
-                                </svg>
-                                <div class="skill-icon-center">
-                                    <i class="fab fa-react"></i>
-                                </div>
-                            </div>
-                            <div class="skill-percent">90%</div>
-                            <p class="skill-name">React.js</p>
-                        </div>
-
-                        <div class="skill-circle">
-                            <div class="circle-box">
-                                <svg viewBox="0 0 140 140">
-                                    <circle cx="70" cy="70" r="60" class="skill-bg"></circle>
-                                    <circle cx="70" cy="70" r="60" class="skill-fill" style="--percent: 85"></circle>
-                                </svg>
-                                <div class="skill-icon-center">
-                                    <i class="fas fa-file-code"></i>
-                                </div>
-                            </div>
-                            <div class="skill-percent">85%</div>
-                            <p class="skill-name">TypeScript</p>
-                        </div>
-
-                        <div class="skill-circle">
-                            <div class="circle-box">
-                                <svg viewBox="0 0 140 140">
-                                    <circle cx="70" cy="70" r="60" class="skill-bg"></circle>
-                                    <circle cx="70" cy="70" r="60" class="skill-fill" style="--percent: 80"></circle>
-                                </svg>
-                                <div class="skill-icon-center">
-                                    <i class="fab fa-node-js"></i>
-                                </div>
-                            </div>
-                            <div class="skill-percent">80%</div>
-                            <p class="skill-name">Node.js</p>
-                        </div>
-
-                        <div class="skill-circle">
-                            <div class="circle-box">
-                                <svg viewBox="0 0 140 140">
-                                    <circle cx="70" cy="70" r="60" class="skill-bg"></circle>
-                                    <circle cx="70" cy="70" r="60" class="skill-fill" style="--percent: 75"></circle>
-                                </svg>
-                                <div class="skill-icon-center">
-                                    <i class="fab fa-python"></i>
-                                </div>
-                            </div>
-                            <div class="skill-percent">75%</div>
-                            <p class="skill-name">Python</p>
-                        </div>
-
-                        <div class="skill-circle">
-                            <div class="circle-box">
-                                <svg viewBox="0 0 140 140">
-                                    <circle cx="70" cy="70" r="60" class="skill-bg"></circle>
-                                    <circle cx="70" cy="70" r="60" class="skill-fill" style="--percent: 70"></circle>
-                                </svg>
-                                <div class="skill-icon-center">
-                                    <i class="fas fa-database"></i>
-                                </div>
-                            </div>
-                            <div class="skill-percent">70%</div>
-                            <p class="skill-name">MongoDB</p>
-                        </div>
+                <div class="about-text-col">
+                    <p class="section-label">// about me</p>
+                    <h2 class="about-heading">Crafting <span class="accent">Digital Experiences</span><br>with Code & Creativity</h2>
+                    <p class="about-desc">I'm a passionate full-stack web developer and AI/ML enthusiast currently pursuing my Bachelor's in Computer Engineering at Baba Ghulam Shah Badshah University. I've gained valuable experience through internships at Bluestock Fintech, International Data Solution, and Next24Tech — building responsive, AI-powered web applications that solve real-world problems.</p>
+                    <div class="about-cta">
+                        <a href="resumewaqar.pdf" class="btn-primary" target="_blank">Download CV <i class="fas fa-arrow-up-right-from-square"></i></a>
+                        <a href="#contact" class="btn-outline">Let's Talk <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -347,183 +128,255 @@
     <!-- Experience Section -->
     <section class="experience" id="experience">
         <div class="container">
-            <h2 class="section-title">Work Experience</h2>
+            <p class="section-label center">// my career &amp; experience</p>
+            <h2 class="section-heading center">My career &amp; <span class="accent">experience</span></h2>
+
             <div class="timeline">
-                <div class="timeline-item right" data-aos="fade-left" data-aos-duration="1000">
-                    <div class="timeline-content">
-                        <span class="timeline-date">Jul 2025 - Aug 2025</span>
-                        <h3 class="timeline-title">Software Development Engineer Intern</h3>
-                        <h4 class="timeline-subtitle">Bluestock Fintech</h4>
-                        <p class="timeline-description">Developed and optimized internal web tools, improving
-                            operational efficiency by ~15%. Strengthened code quality and stability, reducing bug
-                            recurrence by 20%. Collaborated with cross-functional teams to deliver production-ready
-                            features.</p>
+                <div class="timeline-item">
+                    <div class="tl-left">
+                        <h3>Software Development</h3>
+                        <h3>Engineer Intern</h3>
+                        <span class="tl-type">Full-time Internship</span>
+                        <span class="tl-company">Bluestock Fintech</span>
+                    </div>
+                    <div class="tl-center">
+                        <div class="tl-dot"></div>
+                        <div class="tl-line"></div>
+                        <span class="tl-year">2025</span>
+                    </div>
+                    <div class="tl-right">
+                        <p>Developed and optimized internal web tools, improving operational efficiency by ~15%. Strengthened code quality and stability, reducing bug recurrence by 20%. Collaborated with cross-functional teams to deliver production-ready features.</p>
                     </div>
                 </div>
 
-                <div class="timeline-item left" data-aos="fade-right" data-aos-duration="1000">
-                    <div class="timeline-content">
-                        <span class="timeline-date">Feb 2025 - Jun 2025</span>
-                        <h3 class="timeline-title">Web Development Intern</h3>
-                        <h4 class="timeline-subtitle">International Data Solution</h4>
-                        <p class="timeline-description">Built responsive, cross-browser web applications aligned with
-                            client requirements. Delivered 3+ production-ready applications in collaboration with design
-                            and backend teams. Contributed to live client projects with features such as dynamic forms,
-                            authentication systems, and dashboard analytics.</p>
+                <div class="timeline-item">
+                    <div class="tl-left">
+                        <h3>Web Development</h3>
+                        <h3>Intern</h3>
+                        <span class="tl-type">Full-time Internship</span>
+                        <span class="tl-company">International Data Solution</span>
+                    </div>
+                    <div class="tl-center">
+                        <div class="tl-dot"></div>
+                        <div class="tl-line"></div>
+                        <span class="tl-year">2025</span>
+                    </div>
+                    <div class="tl-right">
+                        <p>Built responsive, cross-browser web applications aligned with client requirements. Delivered 3+ production-ready applications in collaboration with design and backend teams. Contributed to live client projects with dynamic forms, authentication systems, and dashboard analytics.</p>
                     </div>
                 </div>
 
-                <div class="timeline-item right" data-aos="fade-left" data-aos-duration="1000">
-                    <div class="timeline-content">
-                        <span class="timeline-date">Jun 2024 - Aug 2024</span>
-                        <h3 class="timeline-title">AI/ML Development Intern</h3>
-                        <h4 class="timeline-subtitle">Next24Tech</h4>
-                        <p class="timeline-description">Designed and evaluated machine learning models achieving up to
-                            85% accuracy. Automated data preprocessing pipelines, reducing manual processing effort by
-                            ~30%. Gained practical experience in deploying AI models and collaborating with
-                            cross-functional teams to deliver impactful solutions.</p>
+                <div class="timeline-item">
+                    <div class="tl-left">
+                        <h3>AI/ML Development</h3>
+                        <h3>Intern</h3>
+                        <span class="tl-type">Full-time Internship</span>
+                        <span class="tl-company">Next24Tech</span>
+                    </div>
+                    <div class="tl-center">
+                        <div class="tl-dot"></div>
+                        <div class="tl-line"></div>
+                        <span class="tl-year">2024</span>
+                    </div>
+                    <div class="tl-right">
+                        <p>Designed and evaluated machine learning models achieving up to 85% accuracy. Automated data preprocessing pipelines, reducing manual processing effort by ~30%. Gained practical experience deploying AI models and collaborating with cross-functional teams.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Education Section -->
-    <section class="education" id="education">
+    <!-- Work / Projects Section -->
+    <section class="work" id="work">
+        <div class="work-grid-bg"></div>
         <div class="container">
-            <h2 class="section-title">Education</h2>
-            <div class="education-content">
-                <div class="education-item" data-aos="fade-up" data-aos-duration="1000">
-                    <span class="education-date">2022 - Present</span>
-                    <h3 class="education-degree">Bachelor of Engineering in Computer Engineering</h3>
-                    <h4 class="education-school">Baba Ghulam Shah Badshah University, Rajouri, Jammu and Kashmir</h4>
-                    <p class="education-description">Currently pursuing my Bachelor's degree in Computer Engineering
-                        with a focus on software development, algorithms, and emerging technologies.</p>
-                </div>
+            <p class="section-label center">// selected projects</p>
+            <h2 class="section-heading center">My <span class="accent">Work</span></h2>
 
-                <div class="education-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
-                    <span class="education-date">2022</span>
-                    <h3 class="education-degree">Senior Secondary Education (12th Standard)</h3>
-                    <h4 class="education-school">Raza Ul Uloom Islamia Higher Secondary School, Poonch, J&K</h4>
-                    <p class="education-description">Completed senior secondary education with 86.8% marks.</p>
+            <!-- Project 01 -->
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="2.png" alt="Room Rental Website">
                 </div>
+                <div class="project-info">
+                    <span class="project-num">01</span>
+                    <h3 class="project-title">Room Rental Website</h3>
+                    <p class="project-cat">Full-Stack Web Application</p>
+                    <p class="project-about">A complete property rental platform enabling landlords to list rooms and tenants to browse, filter, and apply — with authentication, dashboard analytics, and pre-tenancy applications.</p>
+                    <div class="project-tools">
+                        <span class="tool-tag">PHP</span>
+                        <span class="tool-tag">MySQL</span>
+                        <span class="tool-tag">JavaScript</span>
+                        <span class="tool-tag">Bootstrap</span>
+                    </div>
+                    <a href="https://findaroom.co.nz/" target="_blank" rel="noopener noreferrer" class="project-link-btn">View Project <i class="fas fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </div>
 
-                <div class="education-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
-                    <span class="education-date">2020</span>
-                    <h3 class="education-degree">Secondary Education (10th Standard)</h3>
-                    <h4 class="education-school">Raza Ul Uloom Islamia Higher Secondary School, Poonch, J&K</h4>
-                    <p class="education-description">Completed secondary education with 89% marks.</p>
+            <!-- Project 02 -->
+            <div class="project-card reverse">
+                <div class="project-image">
+                    <img src="1.png" alt="Fresh Bite Catering">
+                </div>
+                <div class="project-info">
+                    <span class="project-num">02</span>
+                    <h3 class="project-title">Fresh Bite Catering</h3>
+                    <p class="project-cat">Responsive Website</p>
+                    <p class="project-about">A clean and modern catering website featuring an online menu, booking form, and gallery. Designed mobile-first with smooth animations and fast performance.</p>
+                    <div class="project-tools">
+                        <span class="tool-tag">HTML</span>
+                        <span class="tool-tag">CSS</span>
+                        <span class="tool-tag">JavaScript</span>
+                    </div>
+                    <a href="https://waqarbytes.github.io/Fresh-Bite/" target="_blank" rel="noopener noreferrer" class="project-link-btn">View Project <i class="fas fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </div>
+
+            <!-- Project 03 -->
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="3.png" alt="Yojana Dost">
+                </div>
+                <div class="project-info">
+                    <span class="project-num">03</span>
+                    <h3 class="project-title">Yojana Dost</h3>
+                    <p class="project-cat">AI-Powered Platform</p>
+                    <p class="project-about">An AI-powered government scheme discovery platform built for rural communities. Uses NLP to match users with relevant schemes based on their profile and needs.</p>
+                    <div class="project-tools">
+                        <span class="tool-tag">React</span>
+                        <span class="tool-tag">Node.js</span>
+                        <span class="tool-tag">Python</span>
+                        <span class="tool-tag">Supabase</span>
+                    </div>
+                    <a href="https://yojana-dost-6ajqmnvlz-waqarbytes-projects.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-link-btn">View Project <i class="fas fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </div>
+
+            <!-- Project 04 -->
+            <div class="project-card reverse">
+                <div class="project-image">
+                    <img src="5.png" alt="Insightful Habits">
+                </div>
+                <div class="project-info">
+                    <span class="project-num">04</span>
+                    <h3 class="project-title">Insightful Habits</h3>
+                    <p class="project-cat">Habit Tracking App</p>
+                    <p class="project-about">A React Native habit tracking mobile app with streaks, analytics visualizations, and AI-generated daily insights. Synced across devices via Supabase.</p>
+                    <div class="project-tools">
+                        <span class="tool-tag">React Native</span>
+                        <span class="tool-tag">Supabase</span>
+                        <span class="tool-tag">TypeScript</span>
+                    </div>
+                    <a href="https://github.com/waqarbytes/insightful-habits" target="_blank" rel="noopener noreferrer" class="project-link-btn">View on GitHub <i class="fab fa-github"></i></a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
+    <!-- Tech Stack Section -->
+    <section class="techstack" id="skills">
         <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
-            <div class="contact-content">
-                <div class="contact-info" data-aos="fade-right" data-aos-duration="1000">
-                    <h3 class="contact-heading">Let's Connect</h3>
-                    <p class="contact-text">I'm currently looking for new opportunities. Whether you have a question or
-                        just want to say hi, I'll get back to you as soon as possible!</p>
-                    <ul class="contact-details">
-                        <li>
-                            <i class="fas fa-envelope"></i>
-                            <a href="mailto:beingmohammedwaqar21@gmail.com">beingmohammedwaqar21@gmail.com</a>
-                        </li>
-                        <li>
-                            <i class="fab fa-linkedin-in"></i>
-                            <a href="https://www.linkedin.com/in/mohammed-waqar-156030217/">LinkedIn</a>
-                        </li>
-                        <li>
-                            <i class="fab fa-github"></i>
-                            <a href="https://github.com/waqarbytes">GitHub</a>
-                        </li>
-                    </ul>
-                </div>
+            <p class="section-label center">// technologies I use</p>
+            <h2 class="section-heading center">TECH <span class="accent">STACK</span></h2>
 
-                <div class="contact-form" data-aos="fade-left" data-aos-duration="1000">
-                    <form id="contactForm">
-                        <div class="input-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
+            <div class="tech-grid">
+                <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5"><span>HTML</span></div>
+                <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3"><span>CSS</span></div>
+                <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript"><span>JavaScript</span></div>
+                <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript"><span>TypeScript</span></div>
+                <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React"><span>React</span></div>
+                <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt="Next.js"><span>Next.js</span></div>
+                <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js"><span>Node.js</span></div>
+                <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"><span>Python</span></div>
+                <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP"><span>PHP</span></div>
+                <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL"><span>MySQL</span></div>
+                <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB"><span>MongoDB</span></div>
+                <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL"><span>PostgreSQL</span></div>
+                <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git"><span>Git</span></div>
+                <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub"><span>GitHub</span></div>
+                <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" alt="TensorFlow"><span>TensorFlow</span></div>
+                <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker"><span>Docker</span></div>
+                <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma"><span>Figma</span></div>
+                <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code"><span>VS Code</span></div>
+            </div>
 
-                        <div class="input-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-
-                        <div class="input-group">
-                            <label for="subject">Subject</label>
-                            <input type="text" id="subject" name="subject" required>
-                        </div>
-
-                        <div class="input-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" required></textarea>
-                        </div>
-
-                        <button type="submit" class="submit-btn">Send Message</button>
-                    </form>
-                </div>
+            <div class="techstack-cta">
+                <a href="https://github.com/waqarbytes" target="_blank" rel="noopener noreferrer" class="btn-outline">Play With Me <i class="fas fa-arrow-right"></i></a>
+                <a href="#contact" class="btn-primary">Hire Me <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
     </section>
+
+    <!-- Contact / Footer Section -->
+    <footer class="footer" id="contact">
+        <div class="footer-orb"></div>
+        <div class="container">
+            <div class="footer-form-section">
+                <p class="section-label center">// get in touch</p>
+                <h2 class="section-heading center">Let's <span class="accent">Connect</span></h2>
+
+                <form id="contactForm" class="contact-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="Your Email" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="subject" name="subject" placeholder="Subject" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn btn-primary">Send Message <i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-name">MOHD WAQAR</div>
+                <div class="footer-cols">
+                    <div class="footer-col">
+                        <span class="footer-col-label">Email</span>
+                        <a href="mailto:beingmohammedwaqar21@gmail.com">beingmohammedwaqar21@gmail.com</a>
+                        <span class="footer-col-label" style="margin-top:20px;">Location</span>
+                        <span>Rajouri, J&amp;K, India</span>
+                    </div>
+                    <div class="footer-col">
+                        <span class="footer-col-label">Social</span>
+                        <a href="https://github.com/waqarbytes" target="_blank" rel="noopener noreferrer">Github <i class="fas fa-arrow-up-right-from-square"></i></a>
+                        <a href="https://www.linkedin.com/in/mohammed-waqar-156030217/" target="_blank" rel="noopener noreferrer">LinkedIn <i class="fas fa-arrow-up-right-from-square"></i></a>
+                        <a href="https://twitter.com/waqarbytes" target="_blank" rel="noopener noreferrer">Twitter <i class="fas fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                    <div class="footer-col">
+                        <span class="footer-col-label">Designed &amp; Developed by</span>
+                        <span class="accent">Mohd Waqar</span>
+                        <span style="margin-top:20px;color:#555;">© 2026</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <!-- Success Modal -->
     <div id="successModal" class="modal">
         <div class="modal-content">
-            <div class="modal-icon">
-                <i class="fas fa-check-circle"></i>
-            </div>
+            <div class="modal-icon"><i class="fas fa-check-circle"></i></div>
             <h3>Message Sent!</h3>
-            <p>Thank you for getting in touch, <span id="modalName"></span>. I've received your message and will get
-                back to you shortly at <span id="modalEmail"></span>.</p>
-            <button class="close-btn" id="closeModalBtn">Awesome!</button>
+            <p>Thank you, <span id="modalName"></span>! I'll get back to you at <span id="modalEmail"></span> shortly.</p>
+            <button class="close-btn btn-primary" id="closeModalBtn">Awesome!</button>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <!-- <img src="44.png" alt="Mohd Waqar Logo" class="footer-logo-img"> -->
-                    <span>Mohd Waqar</span>
-                </div>
-                <div class="footer-social">
-                    <a href="https://www.linkedin.com/in/mohammed-waqar-156030217/"><i
-                            class="fab fa-linkedin-in"></i></a>
-                    <a href="https://github.com/waqarbytes"><i class="fab fa-github"></i></a>
-                    <!-- <a href="#"><i class="fab fa-twitter"></i></a> -->
-                    <a href="mailto:beingmohammedwaqar21@gmail.com"><i class="fas fa-envelope"></i></a>
-                </div>
-
-                <div class="footer-links">
-                    <a href="#home">Home</a>
-                    <a href="#about">About</a>
-                    <a href="#skills">Skills</a>
-                    <a href="#projects">Projects</a>
-                    <a href="#experience">Experience</a>
-                    <a href="#contact">Contact</a>
-                </div>
-            </div>
-
-            <div class="footer-copy">
-                © 2026 Mohd Waqar. All rights reserved.
-            </div>
-        </div>
-    </footer>
     <!-- WhatsApp Floating Button -->
     <a href="https://wa.me/916006092936?text=Hi%20Mohd%20Waqar%2C%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20connect!" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
 
     <script src="script.js"></script>
-    <script src="portfolio-filter.js"></script>
     <script src="contact.js"></script>
+    <script src="animations.js"></script>
 </body>
 
 </html>

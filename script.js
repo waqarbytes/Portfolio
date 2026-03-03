@@ -1,87 +1,74 @@
-
-// Initialize AOS
-AOS.init();
-
-// Navbar Scroll Effect
-window.addEventListener('scroll', function () {
-    const header = document.getElementById('header');
+// Navbar scroll effect
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => {
     if (window.scrollY > 50) {
-        header.classList.add('sticky');
+        header.classList.add('scrolled');
     } else {
-        header.classList.remove('sticky');
+        header.classList.remove('scrolled');
     }
 });
 
-// Mobile Menu Toggle
-const menuBtn = document.getElementById('menu-btn');
-const menu = document.getElementById('menu');
+// Mobile nav toggle
+const navToggle = document.getElementById('nav-toggle');
+const navLinks = document.getElementById('nav-links');
 
-menuBtn.addEventListener('click', function () {
-    menu.classList.toggle('active');
-    document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
-
-    if (menuBtn.innerHTML.includes('fa-bars')) {
-        menuBtn.innerHTML = '<i class="fas fa-times"></i>';
-    } else {
-        menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-    }
+navToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+    document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
 });
 
-// Close menu when clicking menu items
-const menuLinks = document.querySelectorAll('.menu li a');
-menuLinks.forEach(link => {
-    link.addEventListener('click', function () {
-        menu.classList.remove('active');
+// Close nav when a link is clicked
+document.querySelectorAll('.nav-links li a').forEach(link => {
+    link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
         document.body.style.overflow = '';
-        menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
     });
 });
 
-// About Tab Functionality
-function openTab(tabName) {
-    const tabContents = document.querySelectorAll('.tab-contents');
-    const tabLinks = document.querySelectorAll('.tab-links');
-
-    tabContents.forEach(content => {
-        content.classList.remove('active-tab');
+// Hero role cycling (CSS animation handles visual, JS sets up multiple span lines)
+const roles = ['WEB DEVELOPER', 'AI/ML ENGINEER', 'FULL-STACK DEV', 'FREELANCER'];
+const roleEl = document.getElementById('heroRole');
+if (roleEl) {
+    // Create additional spans for the CSS animation
+    const wrapper = roleEl.parentElement;
+    wrapper.innerHTML = '';
+    roles.forEach(r => {
+        const span = document.createElement('span');
+        span.className = 'role-text';
+        span.textContent = r;
+        wrapper.appendChild(span);
     });
 
-    tabLinks.forEach(link => {
-        link.classList.remove('active-link');
+    // Apply keyframes dynamically based on count
+    const count = roles.length;
+    const pct = 100 / count;
+    let kf = '';
+    roles.forEach((_, i) => {
+        const start = i * pct;
+        const hold = start + (pct * 0.7);
+        const end = (i + 1) * pct;
+        kf += `${start.toFixed(1)}%, ${hold.toFixed(1)}% { transform: translateY(-${i * 100}%); }\n`;
     });
+    const style = document.createElement('style');
+    style.textContent = `@keyframes roleSlide { ${kf} }`;
+    document.head.appendChild(style);
 
-    document.getElementById(tabName + '-tab').classList.add('active-tab');
-    event.currentTarget.classList.add('active-link');
+    // Adjust wrapper height to show only first role
+    wrapper.style.height = wrapper.firstElementChild
+        ? getComputedStyle(wrapper.firstElementChild).lineHeight
+        : '1em';
 }
 
-// Typed.js Animation
-const typedOptions = {
-    strings: ['Web Developer', 'Freelancer', 'Frontend Developer', 'Backend Developer', 'AI/ML Enthusiast',],
-    typeSpeed: 100,
-    backSpeed: 60,
-    loop: true
-};
-
-if (typeof Typed !== 'undefined') {
-    new Typed('.hero-text h2', typedOptions);
-}
-
-// Form Submission
-// Form submission is handled in contact.js
-
-// Smooth Scrolling
+// Smooth scroll for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-
         const targetId = this.getAttribute('href');
-        const targetElement = document.querySelector(targetId);
-
-        if (targetElement) {
-            window.scrollTo({
-                top: targetElement.offsetTop - 70,
-                behavior: 'smooth'
-            });
+        if (targetId === '#') return;
+        const target = document.querySelector(targetId);
+        if (target) {
+            e.preventDefault();
+            const offset = target.getBoundingClientRect().top + window.scrollY - 70;
+            window.scrollTo({ top: offset, behavior: 'smooth' });
         }
     });
 });
