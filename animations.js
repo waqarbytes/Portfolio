@@ -31,6 +31,7 @@ if (cursorDot && cursorRing && window.innerWidth > 768) {
 
 /* ============================================================
    3. CANVAS ANIMATED ORB BACKGROUND (30fps throttled)
+   Orbs cover full viewport — visible at every scroll position
    ============================================================ */
 (function initCanvas() {
     const canvas = document.getElementById('bgCanvas');
@@ -44,10 +45,14 @@ if (cursorDot && cursorRing && window.innerWidth > 768) {
     resize();
     window.addEventListener('resize', resize);
 
+    // 5 orbs spread across viewport corners and center
+    // so no matter where you scroll, at least 2 orbs are glowing
     const orbs = [
-        { x: 0.75, y: 0.25, r: 350, color: 'rgba(124,58,237,', alpha: 0.15, vx: 0.0003, vy: 0.0002 },
-        { x: 0.15, y: 0.65, r: 250, color: 'rgba(59,130,246,',  alpha: 0.10, vx: -0.0002, vy: 0.0003 },
-        { x: 0.50, y: 0.80, r: 200, color: 'rgba(168,85,247,',  alpha: 0.08, vx: 0.0002, vy: -0.0002 },
+        { x: 0.80, y: 0.20, r: 420, color: 'rgba(124,58,237,',  alpha: 0.18, vx: 0.00025, vy: 0.00015 },
+        { x: 0.15, y: 0.55, r: 320, color: 'rgba(59,130,246,',   alpha: 0.13, vx: -0.0002, vy: 0.00025 },
+        { x: 0.50, y: 0.90, r: 260, color: 'rgba(168,85,247,',   alpha: 0.12, vx: 0.00018, vy: -0.0002 },
+        { x: 0.85, y: 0.70, r: 300, color: 'rgba(124,58,237,',   alpha: 0.10, vx: -0.00015, vy: 0.0002 },
+        { x: 0.25, y: 0.15, r: 280, color: 'rgba(59,130,246,',   alpha: 0.10, vx: 0.0002,  vy: 0.00018 },
     ];
 
     let t = 0;
@@ -58,19 +63,19 @@ if (cursorDot && cursorRing && window.innerWidth > 768) {
     function draw(timestamp) {
         requestAnimationFrame(draw);
         const delta = timestamp - lastTime;
-        if (delta < INTERVAL) return; // throttle to 30fps
+        if (delta < INTERVAL) return;
         lastTime = timestamp - (delta % INTERVAL);
         t += 1;
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         orbs.forEach(orb => {
-            const px = (orb.x + Math.sin(t * orb.vx * 60) * 0.08) * canvas.width;
-            const py = (orb.y + Math.cos(t * orb.vy * 60) * 0.08) * canvas.height;
+            const px = (orb.x + Math.sin(t * orb.vx * 60) * 0.12) * canvas.width;
+            const py = (orb.y + Math.cos(t * orb.vy * 60) * 0.12) * canvas.height;
 
             const gradient = ctx.createRadialGradient(px, py, 0, px, py, orb.r);
             gradient.addColorStop(0,   orb.color + orb.alpha + ')');
-            gradient.addColorStop(0.5, orb.color + (orb.alpha * 0.4) + ')');
+            gradient.addColorStop(0.4, orb.color + (orb.alpha * 0.5) + ')');
             gradient.addColorStop(1,   orb.color + '0)');
 
             ctx.beginPath();
@@ -85,6 +90,7 @@ if (cursorDot && cursorRing && window.innerWidth > 768) {
 
 /* ============================================================
    4. GSAP: REGISTER PLUGIN
+
    ============================================================ */
 gsap.registerPlugin(ScrollTrigger);
 
