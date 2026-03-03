@@ -4,7 +4,7 @@
    ============================================================ */
 
 const GEMINI_API_KEY = 'AIzaSyCE5o7pHaX0626v9_t5YS_sIeZ8VsdjQuE';
-const GEMINI_URL     = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
+const GEMINI_URL     = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`;
 
 /* ----------------------------------------------------------
    SYSTEM PROMPT — Waqar's full profile & personality
@@ -18,9 +18,9 @@ and warmly encourage them to collaborate or hire him. You are friendly, confiden
 Full Name: Mohd Waqar
 Role: Full-Stack Web Developer & AI/ML Enthusiast
 Location: India
-Email: waqarbytes@gmail.com
+Email: beingmohammedwaqar21@gmail.com
 GitHub: github.com/waqarbytes
-LinkedIn: linkedin.com/in/waqarbytes
+LinkedIn: https://www.linkedin.com/in/mohammed-waqar-156030217/
 
 ━━━ SKILLS & TECH STACK ━━━
 Frontend : HTML5, CSS3, JavaScript (ES6+), TypeScript, React.js, Next.js, Bootstrap, Tailwind CSS
