@@ -14,50 +14,50 @@
     const barEl     = document.getElementById('loaderBar');
     if (!preloader) return;
 
-    // Prevent page scroll while loading
+    // Only show preloader ONCE per browser session
+    if (sessionStorage.getItem('portfolioLoaded')) {
+        preloader.style.display = 'none';
+        document.body.style.overflow = '';
+        fireHeroAnimations();
+        return;
+    }
+    sessionStorage.setItem('portfolioLoaded', '1');
+
     document.body.style.overflow = 'hidden';
 
     let current = 0;
-    const target = 100;
-    // Duration: ~2.2s total (goes fast early, slows near 100 like real loading)
-    const duration = 2200; // ms
+    const duration  = 2200;
     const startTime = performance.now();
 
-    function easeOut(t) {
-        return 1 - Math.pow(1 - t, 3); // cubic ease-out
-    }
+    function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
 
     function update(now) {
         const elapsed  = now - startTime;
         const progress = Math.min(elapsed / duration, 1);
-        current = Math.floor(easeOut(progress) * target);
-
-        pctEl.textContent  = current + '%';
-        barEl.style.width  = current + '%';
+        current = Math.floor(easeOut(progress) * 100);
+        pctEl.textContent = current + '%';
+        barEl.style.width = current + '%';
 
         if (progress < 1) {
             requestAnimationFrame(update);
         } else {
-            // Reached 100% — short pause then slide out
             pctEl.textContent = '100%';
-            barEl.style.width  = '100%';
+            barEl.style.width = '100%';
             setTimeout(dismissPreloader, 300);
         }
     }
-
     requestAnimationFrame(update);
 
     function dismissPreloader() {
         preloader.classList.add('done');
-        // Restore scroll after transition completes
         setTimeout(() => {
             document.body.style.overflow = '';
             preloader.style.display = 'none';
-            // Fire hero entrance animations now
             fireHeroAnimations();
-        }, 950); // matches the CSS transition duration (0.9s)
+        }, 950);
     }
 })();
+
 
 /* ============================================================
    HERO ANIMATIONS — called after preloader exits
