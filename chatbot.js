@@ -129,7 +129,7 @@ async function sendMessage() {
     } catch (err) {
         removeTyping(typingId);
         console.error('Gemini error:', err);
-        appendMessage('assistant', "Sorry, I couldn't connect. You can reach Waqar directly at beingmohammedwaqar21@gmail.com 📧");
+        appendMessage('assistant', `⚠️ Error: ${err.message}`);
     }
 
     chatSend.disabled = false;
@@ -148,11 +148,16 @@ chatInput.addEventListener('keydown', e => {
    GEMINI API CALL
    ---------------------------------------------------------- */
 async function callGemini() {
+    // Gemma models don't support system_instruction — inject persona as first turn
+    let contents = history;
+    if (history.length === 1) {
+        contents = [
+            { role: 'user',  parts: [{ text: SYSTEM_PROMPT + '\n\nVisitor: ' + history[0].parts[0].text }] },
+        ];
+    }
+
     const body = {
-        system_instruction: {
-            parts: [{ text: SYSTEM_PROMPT }]
-        },
-        contents: history,
+        contents,
         generationConfig: {
             temperature: 0.8,
             maxOutputTokens: 300,
@@ -168,7 +173,7 @@ async function callGemini() {
     if (!res.ok) {
         const errText = await res.text();
         console.error('Gemini API response:', res.status, errText);
-        throw new Error(`Gemini API error: ${res.status} — ${errText}`);
+        throw new Error(`${res.status}: ${errText.slice(0, 200)}`);
     }
 
     const data = await res.json();
