@@ -26,7 +26,41 @@
     <!-- Animated Canvas Background -->
     <canvas id="bgCanvas"></canvas>
 
+    <!-- ======== PRELOADER ======== -->
+    <div id="preloader">
+        <!-- Scrolling skills rows -->
+        <div class="loader-skills-wrap">
+            <div class="loader-track loader-track-1">
+                <span>HTML</span><span>CSS</span><span>JavaScript</span><span>TypeScript</span><span>React</span><span>Next.js</span><span>Node.js</span><span>Python</span><span>PHP</span><span>MySQL</span><span>MongoDB</span><span>PostgreSQL</span><span>Git</span><span>Docker</span><span>TensorFlow</span><span>Figma</span>
+                <!-- duplicate for seamless loop -->
+                <span>HTML</span><span>CSS</span><span>JavaScript</span><span>TypeScript</span><span>React</span><span>Next.js</span><span>Node.js</span><span>Python</span><span>PHP</span><span>MySQL</span><span>MongoDB</span><span>PostgreSQL</span><span>Git</span><span>Docker</span><span>TensorFlow</span><span>Figma</span>
+            </div>
+            <div class="loader-track loader-track-2">
+                <span>Web Developer</span><span>AI/ML Engineer</span><span>Full-Stack Dev</span><span>Freelancer</span><span>Problem Solver</span><span>UI Designer</span><span>Backend Dev</span><span>Mobile Dev</span>
+                <span>Web Developer</span><span>AI/ML Engineer</span><span>Full-Stack Dev</span><span>Freelancer</span><span>Problem Solver</span><span>UI Designer</span><span>Backend Dev</span><span>Mobile Dev</span>
+            </div>
+            <div class="loader-track loader-track-3">
+                <span>Supabase</span><span>Bootstrap</span><span>Tailwind</span><span>React Native</span><span>VS Code</span><span>GitHub</span><span>Vercel</span><span>Firebase</span><span>REST API</span><span>GraphQL</span><span>Linux</span><span>Nginx</span><span>Redux</span><span>Socket.io</span>
+                <span>Supabase</span><span>Bootstrap</span><span>Tailwind</span><span>React Native</span><span>VS Code</span><span>GitHub</span><span>Vercel</span><span>Firebase</span><span>REST API</span><span>GraphQL</span><span>Linux</span><span>Nginx</span><span>Redux</span><span>Socket.io</span>
+            </div>
+        </div>
+
+        <!-- Dark overlay on top of skills -->
+        <div class="loader-overlay"></div>
+
+        <!-- Center content -->
+        <div class="loader-center">
+            <p class="loader-name">MOHD WAQAR</p>
+            <div class="loader-bar-wrap">
+                <div class="loader-bar" id="loaderBar"></div>
+            </div>
+            <p class="loader-pct" id="loaderPct">0%</p>
+        </div>
+    </div>
+    <!-- ======== END PRELOADER ======== -->
+
     <!-- Navbar -->
+
     <header id="header">
         <nav class="navbar">
             <div class="nav-logo">

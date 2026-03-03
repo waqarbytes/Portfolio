@@ -6,6 +6,74 @@
    ============================================================ */
 
 /* ============================================================
+   0. PRELOADER — percentage counter + skills background
+   ============================================================ */
+(function runPreloader() {
+    const preloader = document.getElementById('preloader');
+    const pctEl     = document.getElementById('loaderPct');
+    const barEl     = document.getElementById('loaderBar');
+    if (!preloader) return;
+
+    // Prevent page scroll while loading
+    document.body.style.overflow = 'hidden';
+
+    let current = 0;
+    const target = 100;
+    // Duration: ~2.2s total (goes fast early, slows near 100 like real loading)
+    const duration = 2200; // ms
+    const startTime = performance.now();
+
+    function easeOut(t) {
+        return 1 - Math.pow(1 - t, 3); // cubic ease-out
+    }
+
+    function update(now) {
+        const elapsed  = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        current = Math.floor(easeOut(progress) * target);
+
+        pctEl.textContent  = current + '%';
+        barEl.style.width  = current + '%';
+
+        if (progress < 1) {
+            requestAnimationFrame(update);
+        } else {
+            // Reached 100% — short pause then slide out
+            pctEl.textContent = '100%';
+            barEl.style.width  = '100%';
+            setTimeout(dismissPreloader, 300);
+        }
+    }
+
+    requestAnimationFrame(update);
+
+    function dismissPreloader() {
+        preloader.classList.add('done');
+        // Restore scroll after transition completes
+        setTimeout(() => {
+            document.body.style.overflow = '';
+            preloader.style.display = 'none';
+            // Fire hero entrance animations now
+            fireHeroAnimations();
+        }, 950); // matches the CSS transition duration (0.9s)
+    }
+})();
+
+/* ============================================================
+   HERO ANIMATIONS — called after preloader exits
+   ============================================================ */
+function fireHeroAnimations() {
+    gsap.from('header',            { opacity: 0, y: -20, duration: 0.7, ease: 'power2.out' });
+    gsap.from('.hero-greeting',    { y: 40, duration: 0.7, delay: 0.1, ease: 'power3.out', clearProps: 'all' });
+    gsap.from('.hero-name',        { y: 60, duration: 0.8, delay: 0.2, ease: 'power3.out', clearProps: 'all' });
+    gsap.from('.hero-role-label',  { y: 30, duration: 0.6, delay: 0.3, ease: 'power3.out', clearProps: 'all' });
+    gsap.from('.hero-roles',       { y: 40, duration: 0.7, delay: 0.35, ease: 'power3.out', clearProps: 'all' });
+    gsap.from('.hero-scroll',      { opacity: 0, y: 20, duration: 0.5, delay: 0.5, ease: 'power3.out', clearProps: 'all' });
+    gsap.from('.social-sidebar',   { x: -40, opacity: 0, duration: 0.7, delay: 0.4, ease: 'power3.out', clearProps: 'all' });
+    gsap.from('.resume-fab',       { x: 40,  opacity: 0, duration: 0.7, delay: 0.4, ease: 'power3.out', clearProps: 'all' });
+}
+
+/* ============================================================
    1. CUSTOM CURSOR (GSAP-driven)
    ============================================================ */
 const cursorDot  = document.getElementById('cursorDot');
@@ -76,31 +144,8 @@ if (cursorDot && cursorRing && window.matchMedia('(hover: hover)').matches) {
 gsap.registerPlugin(ScrollTrigger);
 
 /* ============================================================
-   4. HERO ENTRANCE — CSS class toggle (no opacity dependency)
-   Elements start visible; class adds the animation effect.
-   ============================================================ */
-// Navbar fade in
-gsap.from('header', { opacity: 0, y: -20, duration: 0.8, ease: 'power2.out', delay: 0.1 });
-
-// Hero text — translate only, elements STAY visible (no opacity:0)
-// Using small delay stagger so each line slides up in sequence
-const heroItems = ['.hero-greeting', '.hero-name', '.hero-role-label', '.hero-roles', '.hero-scroll'];
-heroItems.forEach((sel, i) => {
-    gsap.from(sel, {
-        y: 40,
-        duration: 0.8,
-        delay: 0.2 + i * 0.12,
-        ease: 'power3.out',
-        clearProps: 'all', // clean up after animation
-    });
-});
-
-// sidebar and resume — slide in from their natural positions
-gsap.from('.social-sidebar', { x: -40, opacity: 0, duration: 0.8, delay: 0.9, ease: 'power3.out', clearProps: 'all' });
-gsap.from('.resume-fab',     { x: 40,  opacity: 0, duration: 0.8, delay: 0.9, ease: 'power3.out', clearProps: 'all' });
-
-/* ============================================================
    5. SCROLL REVEAL — uses immediateRender:false so elements
+
    are NOT set to opacity:0 until ScrollTrigger fires.
    ============================================================ */
 
