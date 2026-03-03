@@ -1499,8 +1499,8 @@ header.scrolled {
 /* FAB button — bottom left so it doesn't clash with WhatsApp */
 .chat-fab {
     position: fixed;
-    bottom: 30px;
-    right: 100px;
+    bottom: 100px;
+    right: 30px;
     width: 56px;
     height: 56px;
     border-radius: 50%;
@@ -1784,7 +1784,7 @@ header.scrolled {
     }
 
     .chat-fab {
-        bottom: 20px;
-        right: 80px;
+        bottom: 95px;
+        right: 20px;
     }
 }
