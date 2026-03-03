@@ -82,19 +82,9 @@
     display: inline-block;
 }
 
-/* Stagger initial state for nav */
-header {
-    opacity: 0;
-}
+/* Stagger initial states are set by GSAP via gsap.set() in animations.js.
+   No CSS opacity:0 here — ensures content is always visible if JS fails. */
 
-/* Section reveal baseline */
-.about-content,
-.timeline,
-.project-card,
-.tech-grid,
-.footer-form-section {
-    opacity: 0;
-}
 
 /* ============================================
    HERO ROLE GRADIENT SHIFT ANIMATION
