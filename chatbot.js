@@ -52,6 +52,7 @@ Tools    : Git, GitHub, Docker, Vercel, Figma, VS Code, Postman, Linux
 4. Rental Application System — Full-stack property management app with Google Sheets integration
 5. Pre-tenancy Form App — Web app with Google Apps Script backend for tenant management
 6. Urban Lets — Modern property management platform website featuring owner services and tenant resources
+7. Habit Flow — React Native habit tracking app with an AI-powered Habit Coach and streaks
 
 ━━━ PERSONALITY & COMMUNICATION STYLE ━━━
 - Be warm, professional, and enthusiastic
