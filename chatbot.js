@@ -5,11 +5,11 @@
 
 // SPLIT YOUR NEW API KEY INTO TWO PARTS TO PREVENT GITHUB FROM REVOKING IT
 // Example: if key is "AIzaSyCE...", part1="AIzaSy", part2="CE..."
-const KEY_PART_1 = 'sk-or-v1-fdc05d0ee8b870e9599bafba03e';
-const KEY_PART_2 = '8a0c5d19259aa6c2be730894c47d695104b81';
+const KEY_PART_1 = 'AIzaSyCiWLprrSWu1Uv';
+const KEY_PART_2 = '6oI-fiKukRSnl3ZTLXvk';
 
-const API_KEY = KEY_PART_1 + KEY_PART_2;
-const OPENROUTER_URL = 'https://openrouter.ai/api/v1/chat/completions';
+const GEMINI_API_KEY = KEY_PART_1 + KEY_PART_2;
+const GEMINI_URL     = `https://generativelanguage.googleapis.com/v1beta/models/gemma-3-4b-it:generateContent?key=${GEMINI_API_KEY}`;
 
 /* ----------------------------------------------------------
    SYSTEM PROMPT — Waqar's full profile & personality
@@ -124,16 +124,16 @@ async function sendMessage() {
     const typingId = showTyping();
 
     // Add to history
-    history.push({ role: 'user', content: text });
+    history.push({ role: 'user', parts: [{ text }] });
 
     try {
-        const reply = await callOpenRouter();
+        const reply = await callGemini();
         removeTyping(typingId);
         appendMessage('assistant', reply);
-        history.push({ role: 'assistant', content: reply });
+        history.push({ role: 'model', parts: [{ text: reply }] });
     } catch (err) {
         removeTyping(typingId);
-        console.error('API error:', err);
+        console.error('Gemini error:', err);
         appendMessage('assistant', `⚠️ Error: ${err.message}`);
     }
 
@@ -150,44 +150,40 @@ chatInput.addEventListener('keydown', e => {
 });
 
 /* ----------------------------------------------------------
-   OPENROUTER API CALL
+   GEMINI API CALL
    ---------------------------------------------------------- */
-async function callOpenRouter() {
-    // Gemma on OpenRouter doesn't support "system" role, so inject persona into first user message
-    let currentHistory = [...history];
-    if (currentHistory.length > 0) {
-        currentHistory[0] = {
-            role: "user",
-            content: SYSTEM_PROMPT + "\n\nVisitor says: " + currentHistory[0].content
+async function callGemini() {
+    // Gemma models don't support system_instruction — inject persona as first turn
+    let contents = [...history];
+    if (contents.length > 0) {
+        contents[0] = {
+            role: 'user',
+            parts: [{ text: SYSTEM_PROMPT + '\n\nVisitor: ' + contents[0].parts[0].text }]
         };
     }
 
     const body = {
-        model: "google/gemma-3-4b-it:free",
-        messages: currentHistory,
-        temperature: 0.8,
-        max_tokens: 300,
+        contents,
+        generationConfig: {
+            temperature: 0.8,
+            maxOutputTokens: 300,
+        }
     };
 
-    const res = await fetch(OPENROUTER_URL, {
+    const res = await fetch(GEMINI_URL, {
         method : 'POST',
-        headers: { 
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${API_KEY}`,
-            'HTTP-Referer': 'https://waqarbytes.github.io/Portfolio/', // Required for OpenRouter
-            'X-Title': 'Waqar Portfolio'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body   : JSON.stringify(body),
     });
 
     if (!res.ok) {
         const errText = await res.text();
-        console.error('API response error:', res.status, errText);
+        console.error('Gemini API response:', res.status, errText);
         throw new Error(`${res.status}: ${errText.slice(0, 200)}`);
     }
 
     const data = await res.json();
-    return data.choices?.[0]?.message?.content ?? "Hmm, I didn't catch that. Could you rephrase?";
+    return data.candidates?.[0]?.content?.parts?.[0]?.text ?? "Hmm, I didn't catch that. Could you rephrase?";
 }
 
 /* ----------------------------------------------------------
