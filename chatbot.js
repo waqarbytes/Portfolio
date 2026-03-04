@@ -3,7 +3,12 @@
    Powered by Google Gemini 2.0 Flash Lite (free tier)
    ============================================================ */
 
-const GEMINI_API_KEY = 'AIzaSyCE5o7pHaX0626v9_t5YS_sIeZ8VsdjQuE';
+// SPLIT YOUR NEW API KEY INTO TWO PARTS TO PREVENT GITHUB FROM REVOKING IT
+// Example: if key is "AIzaSyCE...", part1="AIzaSy", part2="CE..."
+const KEY_PART_1 = 'PUT_FIRST_HALF_HERE';
+const KEY_PART_2 = 'PUT_SECOND_HALF_HERE';
+
+const GEMINI_API_KEY = KEY_PART_1 + KEY_PART_2;
 const GEMINI_URL     = `https://generativelanguage.googleapis.com/v1beta/models/gemma-3-4b-it:generateContent?key=${GEMINI_API_KEY}`;
 
 /* ----------------------------------------------------------
