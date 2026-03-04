@@ -39,7 +39,7 @@ Tools    : GitHub, Vercel, Figma, VS Code, Postman, Linux
   - Built 15+ production web apps for clients across e-commerce, SaaS, and real estate sectors
   - Delivered AI-powered tools including custom AI Chatbot integrations and computer vision
 
-• Custom AI Assistant & Chatbot Developer
+• AI Assistant Builder
   - Specializing in creating intelligent, context-aware AI agents for modern web applications
   - Integrating models like Gemini, OpenAI, and DeepSeek via open APIs
 

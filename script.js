@@ -26,7 +26,7 @@ document.querySelectorAll('.nav-links li a').forEach(link => {
 });
 
 // Hero role cycling (CSS animation handles visual, JS sets up multiple span lines)
-const roles = ['WEB DEVELOPER', 'AI/ML ENGINEER', 'AI ASSISTANT DEV', 'FULL-STACK DEV'];
+const roles = ['WEB DEVELOPER', 'AI/ML ENGINEER', 'AI ASSISTANT BUILDER', 'FULL-STACK DEV'];
 const roleEl = document.getElementById('heroRole');
 if (roleEl) {
     // Create additional spans for the CSS animation
