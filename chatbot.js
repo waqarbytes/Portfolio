@@ -37,7 +37,11 @@ Tools    : GitHub, Vercel, Figma, VS Code, Postman, Linux
 ━━━ EXPERIENCE ━━━
 • Freelance Full-Stack Developer (2022 – Present)
   - Built 15+ production web apps for clients across e-commerce, SaaS, and real estate sectors
-  - Delivered AI-powered tools including computer vision and chatbot integrations
+  - Delivered AI-powered tools including custom AI Chatbot integrations and computer vision
+
+• Custom AI Assistant & Chatbot Developer
+  - Specializing in creating intelligent, context-aware AI agents for modern web applications
+  - Integrating models like Gemini, OpenAI, and DeepSeek via open APIs
 
 • AI Wellness Mirror Project
   - Built a real-time AI system using OpenCV that detects fatigue, emotions, and head pose via webcam
