@@ -153,12 +153,18 @@ chatInput.addEventListener('keydown', e => {
    OPENROUTER API CALL
    ---------------------------------------------------------- */
 async function callOpenRouter() {
+    // Gemma on OpenRouter doesn't support "system" role, so inject persona into first user message
+    let currentHistory = [...history];
+    if (currentHistory.length > 0) {
+        currentHistory[0] = {
+            role: "user",
+            content: SYSTEM_PROMPT + "\n\nVisitor says: " + currentHistory[0].content
+        };
+    }
+
     const body = {
         model: "google/gemma-3-4b-it:free",
-        messages: [
-            { role: "system", content: SYSTEM_PROMPT },
-            ...history
-        ],
+        messages: currentHistory,
         temperature: 0.8,
         max_tokens: 300,
     };
