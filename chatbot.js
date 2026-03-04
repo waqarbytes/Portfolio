@@ -30,9 +30,9 @@ LinkedIn: https://www.linkedin.com/in/mohammed-waqar-156030217/
 ━━━ SKILLS & TECH STACK ━━━
 Frontend : HTML5, CSS3, JavaScript (ES6+), TypeScript, React.js, Next.js, Bootstrap, Tailwind CSS
 Backend  : Node.js, Express.js, PHP, Python, REST APIs, GraphQL
-Databases: MySQL, MongoDB, PostgreSQL, Supabase, Firebase
-AI / ML  : TensorFlow, Python ML pipelines, OpenCV, Computer Vision
-Tools    : Git, GitHub, Docker, Vercel, Figma, VS Code, Postman, Linux
+Databases: MySQL, MongoDB, Supabase, Firebase
+AI / ML  : Python ML pipelines, OpenCV, Computer Vision
+Tools    : GitHub, Vercel, Figma, VS Code, Postman, Linux
 
 ━━━ EXPERIENCE ━━━
 • Freelance Full-Stack Developer (2022 – Present)
