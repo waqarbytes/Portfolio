@@ -154,7 +154,7 @@ chatInput.addEventListener('keydown', e => {
    ---------------------------------------------------------- */
 async function callOpenRouter() {
     const body = {
-        model: "google/gemini-2.0-flash-lite-preview-02-05:free",
+        model: "google/gemma-3-4b-it:free",
         messages: [
             { role: "system", content: SYSTEM_PROMPT },
             ...history
