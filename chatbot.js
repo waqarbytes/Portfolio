@@ -50,13 +50,14 @@ Tools    : GitHub, Vercel, Figma, VS Code, Postman, Linux
   - Designed and built a secure, scalable AI-powered SaaS platform for PDF manipulation (similar to iLovePDF)
 
 ━━━ NOTABLE PROJECTS ━━━
-1. AI Wellness Mirror — Real-time computer vision for emotion & fatigue detection using Python + OpenCV
-2. Portfolio Website — This website! Built with HTML, CSS, GSAP animations, canvas orbs, and an AI chatbot
-3. PDF SaaS Platform — Multi-feature PDF tool SaaS with authentication, payments, and file processing
-4. Rental Application System — Full-stack property management app with Google Sheets integration
-5. Pre-tenancy Form App — Web app with Google Apps Script backend for tenant management
-6. Urban Lets — Modern property management platform website featuring owner services and tenant resources
-7. Habit Flow — React Native habit tracking app with an AI-powered Habit Coach and streaks
+1. AI Wellness Mirror — Real-time computer vision for dual-channel emotion & fatigue detection using Python, OpenCV, DeepFace, Librosa, and Flask. GitHub: github.com/waqarbytes/Ai-Wellness-Mirror
+2. Room Rental Website — Full-stack property rental platform (PHP, MySQL, JS, Bootstrap). Live: findaroom.co.nz
+3. Fresh Bite Catering — Modern responsive catering website with online menu & booking. Live: waqarbytes.github.io/Fresh-Bite
+4. Yojana Dost — AI-powered government scheme discovery platform for rural communities using NLP (React, Node.js, Python, Supabase)
+5. Habit Flow — React Native habit tracking mobile app with AI Habit Coach and Supabase sync
+6. Urban Lets — Modern property management platform (React, Tailwind). Live: urbanlets.co.nz
+7. Insightful Habits — Habit-tracking web app with Chart.js dashboards and Supabase real-time subscriptions
+8. Reflect & Thrive — AI-powered journaling platform with 90-day mood-trend analysis (React.js, Node.js, Supabase)
 
 ━━━ PERSONALITY & COMMUNICATION STYLE ━━━
 - Be warm, professional, and enthusiastic
