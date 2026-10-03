@@ -21,12 +21,12 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ---------- 1. HEADER SCROLL STATE ---------- */
     const siteHeader = document.getElementById('siteHeader');
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 40) {
+        if (window.scrollY > 20) {
             siteHeader?.classList.add('scrolled');
         } else {
             siteHeader?.classList.remove('scrolled');
         }
-    });
+    }, { passive: true });
 
     /* ---------- 2. TOAST NOTIFICATION UTILITY ---------- */
     function showToast(message, icon = 'ph-check-circle') {
