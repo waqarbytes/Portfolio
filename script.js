@@ -127,74 +127,77 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ---------- 6. CASE STUDY MODAL / DRAWER SYSTEM ---------- */
     const caseStudyData = {
         oakandkey: {
-            kicker: '01 / 09 · Commercial SaaS · New Zealand',
-            title: 'Oak & Key Property Management SaaS',
-            summary: 'New Zealand\'s premier property management software built specifically for room-by-room rentals, student accommodation, and co-living properties. Features real-time tenancy dashboards, compliance monitoring, digital inspection report generation, and automated rental invoicing.',
+            kicker: '01 / 09 · Production SaaS · New Zealand',
+            title: 'Oak & Key Property Management Platform',
+            summary: 'Designed, built, and shipped end-to-end as the sole developer for a New Zealand property firm (React, TypeScript, Supabase, PostgreSQL). Handles end-to-end lease tracking, automated rent collection, bond lodgements, maintenance workflows, interactive Recharts financial dashboards, and Excel/PDF data-ingestion pipelines.',
             liveUrl: 'https://oakandkey.co.nz/',
             githubUrl: '',
-            whatIBuilt: 'Architected and developed the complete frontend and backend integration for Oak & Key. Solved complex tenancy lifecycle tracking, room-by-room pricing calculations, inspection report photo attachments, and tenant onboarding flows.',
+            whatIBuilt: 'Architected and developed the entire production SaaS platform from scratch as the sole engineer. Engineered data-ingestion pipelines parsing Excel (xlsx) and PDF (pdf-lib) forms enabling bulk imports of inspections, tenant applications, and payment ledgers, along with real-time financial reporting.',
             features: [
-                'Room-by-room property breakdown with custom lease periods and bond deposits',
-                'Supabase Realtime backend for live tenancy status and maintenance request dispatch',
-                'Automated PDF inspection report generator with photo uploads',
-                'Role-based access control for Property Managers, Landlords, and Tenants',
-                'Responsive multi-device portal optimized with Tailwind CSS and Vite'
+                'Room-by-room property breakdown with custom lease terms, bond lodgements, and rent schedules',
+                'Data-ingestion pipelines parsing Excel (xlsx) and PDF (pdf-lib) forms for bulk inspection and ledger imports',
+                'Interactive financial analytics dashboards powered by Recharts with dynamic revenue projections',
+                'Supabase PostgreSQL backend with Row Level Security (RLS) ensuring strict multi-tenant isolation',
+                'Automated digital inspection reports with high-resolution photo attachments and tenant signing'
             ],
             architecture: [
-                { step: '01 · Client', title: 'React 18 + Vite + Tailwind' },
-                { step: '02 · State', title: 'TypeScript Data Models' },
-                { step: '03 · Cloud DB', title: 'Supabase PostgreSQL' },
-                { step: '04 · Auth', title: 'Row Level Security (RLS)' },
-                { step: '05 · Storage', title: 'Supabase Storage Bucket' }
+                { step: '01 · Client', title: 'React 18 + TypeScript + Tailwind' },
+                { step: '02 · Pipelines', title: 'xlsx & pdf-lib Ingestion' },
+                { step: '03 · Database', title: 'Supabase PostgreSQL (RLS)' },
+                { step: '04 · Analytics', title: 'Recharts Financial Dashboards' },
+                { step: '05 · Storage', title: 'Supabase Secure Media Bucket' }
             ],
-            tech: ['React.js', 'TypeScript', 'Supabase', 'Tailwind CSS', 'Vite', 'PostgreSQL', 'RLS Policies'],
+            tech: ['React.js', 'TypeScript', 'Supabase', 'PostgreSQL', 'Tailwind CSS', 'Recharts', 'xlsx', 'pdf-lib', 'Vite'],
             image: 'images/oakandkey.png'
         },
-        aiwellness: {
-            kicker: '02 / 09 · Multimodal AI · Computer Vision',
-            title: 'AI Wellness Mirror (Dual-Channel Emotion Detection)',
-            summary: 'A real-time dual-channel emotion and fatigue analysis system combining facial expression recognition (OpenCV + DeepFace) and vocal acoustics (Librosa + MFCC audio features). Confidence-weighted ensemble fusion yields ~18% higher diagnostic accuracy.',
-            liveUrl: 'https://facesync.netlify.app/',
-            githubUrl: 'https://github.com/waqarbytes',
-            whatIBuilt: 'Designed the computer vision and audio analysis pipeline in Python. Built a live Flask backend streaming webcam feeds and microphone audio with confidence weighting and telemetry dashboards.',
-            features: [
-                'Simultaneous facial micro-expression analysis via OpenCV and DeepFace',
-                'Vocal pitch, tone, and stress extraction using Librosa audio MFCC spectra',
-                'Ensemble weighted decision algorithm reconciling audio and visual confidence',
-                'Real-time streaming dashboard with historical wellness trend visualization',
-                'Lightweight edge-optimized pipeline running at 30fps+'
-            ],
-            architecture: [
-                { step: '01 · Sensor', title: 'Webcam + Mic Stream' },
-                { step: '02 · Vision', title: 'OpenCV + DeepFace' },
-                { step: '03 · Audio', title: 'Librosa MFCC Extractor' },
-                { step: '04 · Ensemble', title: 'Confidence Fusion Engine' },
-                { step: '05 · Dashboard', title: 'Flask + Chart.js UI' }
-            ],
-            tech: ['Python', 'OpenCV', 'DeepFace', 'Librosa', 'Flask', 'NumPy', 'Computer Vision'],
-            image: 'images/ai_wellness_mirror.png'
-        },
         yojanadost: {
-            kicker: '03 / 09 · AI Social Innovation',
-            title: 'Yojana Dost AI Government Scheme Discovery',
-            summary: 'An AI-powered public benefits platform built to help citizens in rural and regional communities discover, understand, and apply for relevant government welfare schemes using Natural Language Processing.',
-            liveUrl: 'https://yojana-dost-6ajqmnvlz-waqarbytes-projects.vercel.app/',
-            githubUrl: 'https://github.com/waqarbytes',
-            whatIBuilt: 'Engineered an intelligent NLP recommendation system matching user demographic attributes, income profiles, and regional criteria against thousands of public welfare schemes.',
+            kicker: '02 / 09 · Production RAG · 1,000+ Daily Queries',
+            title: 'Yojana Dost — RAG-Powered Knowledge Assistant',
+            summary: 'A production Retrieval-Augmented Generation (RAG) assistant serving 1,000+ daily queries with cited answers over 150+ government scheme documents. On a 100-query labeled eval harness: pass rate rose from 38% to 74%, hallucinations fell from 38% to 8%, faithfulness rose from 2.1 to 4.6/5, with 86% citation precision and 82% recall@4.',
+            liveUrl: 'https://yojana-dost.vercel.app/',
+            githubUrl: 'https://github.com/waqarbytes/Yojana-dost',
+            whatIBuilt: 'Engineered the complete production RAG pipeline using pgvector embeddings, hybrid dense + BM25 retrieval with reciprocal rank fusion, and cross-encoder reranking. Cut p95 latency from 294ms to 16ms (18x) and LLM cost by 53% via semantic caching (0.92 cosine threshold). Implemented multi-model routing with automatic fallback across OpenAI (GPT-4o), Anthropic (Claude), and xAI (Grok), live /api/metrics telemetry, and sliding-window rate limiting tested under 50-VU k6 load with 0% errors.',
             features: [
-                'Multilingual NLP query comprehension for rural users',
-                'Automated eligibility scoring matrix for state and central schemes',
-                'Simplified step-by-step application guides and document checklists',
-                'Fast responsive frontend built with React and Vercel edge deployment'
+                'Hybrid retrieval: pgvector dense semantic embeddings + BM25 keyword search fused via Reciprocal Rank Fusion',
+                'Cross-encoder reranking over 150+ scheme documents with 86% citation precision and 82% recall@4',
+                'Semantic caching (0.92 cosine threshold) cutting p95 latency from 294ms to 16ms (18x) and per-query LLM cost by 53%',
+                'Multi-model routing with automatic fallback across OpenAI GPT-4o, Anthropic Claude, and xAI Grok APIs',
+                '100-query labeled eval harness achieving 74% pass rate, 8% hallucination rate, and 4.6/5 faithfulness',
+                'Tested under 50-VU k6 load with 0% errors behind sliding-window rate limiting; 100% refusal on out-of-scope probes'
             ],
             architecture: [
-                { step: '01 · User', title: 'Voice & Text Profile' },
-                { step: '02 · NLP', title: 'Python Scheme Matcher' },
-                { step: '03 · Backend', title: 'Node.js REST API' },
-                { step: '04 · DB', title: 'Supabase Vector Database' }
+                { step: '01 · Search', title: 'Hybrid BM25 + pgvector Dense' },
+                { step: '02 · Rank', title: 'Reciprocal Rank Fusion + Reranker' },
+                { step: '03 · Cache', title: 'Semantic Caching (0.92 Cosine)' },
+                { step: '04 · Routing', title: 'GPT-4o + Claude + Grok Fallback' },
+                { step: '05 · Telemetry', title: 'Live /api/metrics + k6 Load Tested' }
             ],
-            tech: ['React.js', 'Node.js', 'Python', 'Supabase', 'NLP', 'REST API', 'Vercel'],
+            tech: ['React', 'Node.js', 'PostgreSQL (pgvector)', 'OpenAI GPT-4o', 'Anthropic Claude', 'xAI Grok', 'BM25', 'Redis', 'k6', 'Vercel'],
             image: 'images/3.png'
+        },
+        indiaschemesmcp: {
+            kicker: '03 / 09 · Open-Source AI Tooling · Claude Desktop',
+            title: 'MCP Server — India Schemes Toolkit (Model Context Protocol)',
+            summary: 'Built and published an authenticated Model Context Protocol (MCP) server exposing 6 tools for scheme search, eligibility checking, deadlines, and comparisons with Zod schema validation and sliding-window rate limiting; usable directly from Claude Desktop and any MCP-compatible client.',
+            liveUrl: '',
+            githubUrl: 'https://github.com/waqarbytes/india-schemes-mcp',
+            whatIBuilt: 'Architected and built the full TypeScript MCP server following Anthropic\'s Model Context Protocol specification. Created 6 deterministic tools with strict Zod parameter validation, error handling, and rate-limiting middleware.',
+            features: [
+                'Exposes 6 authenticated MCP tools for semantic scheme search, eligibility criteria evaluation, deadline tracking, and scheme comparisons',
+                'Type-safe schema validation on every tool call powered by Zod',
+                'Sliding-window rate limiting preventing upstream API exhaustion',
+                'Native compatibility with Claude Desktop and any MCP-compliant agent runtime',
+                'Comprehensive test suite with unit tests verifying tool execution outputs'
+            ],
+            architecture: [
+                { step: '01 · Client', title: 'Claude Desktop / MCP Client' },
+                { step: '02 · Protocol', title: 'JSON-RPC over stdio / SSE' },
+                { step: '03 · Validator', title: 'Zod Input Schema Enforcement' },
+                { step: '04 · Tools', title: '6x Schemes Tools Registry' },
+                { step: '05 · Security', title: 'Sliding-Window Rate Limiter' }
+            ],
+            tech: ['TypeScript', 'Model Context Protocol (MCP)', 'Zod', 'Node.js', 'JSON-RPC', 'Rate Limiting', 'Claude Desktop'],
+            image: 'images/reflect_thrive.png'
         },
         habitflow: {
             kicker: '04 / 09 · Mobile Application · React Native',
