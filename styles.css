@@ -2466,43 +2466,82 @@ ul {
 
 .tech-categories-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 900px) {
   .tech-categories-grid {
     grid-template-columns: 1fr;
+    gap: 20px;
   }
 }
 
 .tech-category-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-glass);
+  background: linear-gradient(145deg, rgba(20, 24, 33, 0.85), rgba(12, 14, 20, 0.95));
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-xl);
-  padding: 32px;
+  padding: 32px 28px;
   backdrop-filter: blur(16px);
-  transition: transform var(--transition-medium), border-color var(--transition-medium);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition-medium), border-color var(--transition-medium), box-shadow var(--transition-medium);
 }
 
 .tech-category-card:hover {
-  transform: translateY(-6px);
-  border-color: var(--accent-lime);
+  transform: translateY(-4px);
+  border-color: rgba(184, 255, 34, 0.4);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4), 0 0 24px rgba(184, 255, 34, 0.08);
+}
+
+.tech-category-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 22px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.tech-category-card-header .card-title-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tech-category-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(184, 255, 34, 0.1);
+  border: 1px solid rgba(184, 255, 34, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  color: var(--accent-lime);
 }
 
 .tech-category-card h3 {
   font-family: var(--font-display);
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-weight: 700;
   color: #fff;
-  margin-bottom: 24px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  margin: 0;
+  letter-spacing: -0.01em;
 }
 
-.tech-category-card h3 i {
-  color: var(--accent-lime);
+.tech-count-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
 }
 
 .tech-items-wrap {
@@ -2511,23 +2550,29 @@ ul {
   gap: 12px;
 }
 
+@media (max-width: 480px) {
+  .tech-items-wrap {
+    grid-template-columns: 1fr;
+  }
+}
+
 .tech-item {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 14px;
+  gap: 12px;
+  padding: 12px 14px;
   background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--border-subtle);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: var(--radius-md);
   font-size: 0.9rem;
   font-weight: 600;
-  color: var(--text-secondary);
-  transition: var(--transition-fast);
+  color: #e2e8f0;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .tech-item:hover {
   background: rgba(184, 255, 34, 0.08);
-  border-color: var(--accent-lime);
+  border-color: rgba(184, 255, 34, 0.35);
   color: #fff;
   transform: translateY(-2px);
 }
@@ -2535,6 +2580,13 @@ ul {
 .tech-item img {
   width: 20px;
   height: 20px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.tech-item i {
+  font-size: 1.15rem;
+  flex-shrink: 0;
 }
 
 /* Infinite Tech Ticker */
