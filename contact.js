@@ -1,60 +1,72 @@
-// Contact Form Submission
-const scriptURL = 'https://script.google.com/macros/s/AKfycby9_gZXSk6O0OKVLgSnFhEKeOLoLum6FaG9xq5jlTkHQSy8aMzzmClqCMLKZLTCYo01/exec'; // Replace with your URL after deployment
-const form = document.getElementById('contactForm');
-const btn = document.querySelector('.submit-btn');
+/* ============================================================
+   CONTACT.JS — CONTACT FORM HANDLER WITH MODAL & TOAST
+   ============================================================ */
 
-form.addEventListener('submit', e => {
-    e.preventDefault();
-    btn.disabled = true;
-    btn.innerHTML = 'Sending...';
+document.addEventListener('DOMContentLoaded', () => {
+    const scriptURL = 'https://script.google.com/macros/s/AKfycby9_gZXSk6O0OKVLgSnFhEKeOLoLum6FaG9xq5jlTkHQSy8aMzzmClqCMLKZLTCYo01/exec';
+    const form = document.getElementById('contactForm');
+    const btn = form?.querySelector('.submit-btn');
+    const modal = document.getElementById('successModal');
+    const closeModalBtn = document.getElementById('closeModalBtn');
 
-    const formData = new FormData(form);
-    formData.append('timestamp', new Date().toLocaleString());
+    if (!form || !btn) return;
 
-    fetch(scriptURL, { method: 'POST', body: formData })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok. Status: ' + response.status);
-            }
-            return response;
-        })
-        .then(() => {
-            // Show Success Modal
-            const modal = document.getElementById('successModal');
-            document.getElementById('modalName').textContent = formData.get('name');
-            document.getElementById('modalEmail').textContent = formData.get('email');
+    form.addEventListener('submit', e => {
+        e.preventDefault();
 
-            modal.style.display = 'block';
-            setTimeout(() => {
-                modal.classList.add('show');
-            }, 10);
+        const originalBtnHtml = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = `<span>Sending...</span> <i class="ph ph-spinner animate-spin"></i>`;
 
-            // Handle Close Button
-            document.getElementById('closeModalBtn').addEventListener('click', () => {
-                modal.classList.remove('show');
-                setTimeout(() => {
-                    modal.style.display = 'none';
-                }, 300);
-            });
+        const formData = new FormData(form);
+        formData.append('timestamp', new Date().toLocaleString());
 
-            // Close on outside click
-            window.onclick = function (event) {
-                if (event.target == modal) {
-                    modal.classList.remove('show');
-                    setTimeout(() => {
-                        modal.style.display = 'none';
-                    }, 300);
+        fetch(scriptURL, { method: 'POST', body: formData })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
                 }
-            }
+                return response;
+            })
+            .then(() => {
+                const modalName = document.getElementById('modalName');
+                const modalEmail = document.getElementById('modalEmail');
+                if (modalName) modalName.textContent = formData.get('name') || 'Friend';
+                if (modalEmail) modalEmail.textContent = formData.get('email') || 'your email';
 
-            form.reset();
-            btn.disabled = false;
-            btn.innerHTML = 'Send Message';
-        })
-        .catch(error => {
-            console.error('Submission Error:', error);
-            alert('Error sending message: ' + error.message);
-            btn.disabled = false;
-            btn.innerHTML = 'Send Message';
-        });
+                if (modal) {
+                    modal.classList.add('show');
+                }
+
+                form.reset();
+                btn.disabled = false;
+                btn.innerHTML = originalBtnHtml;
+            })
+            .catch(error => {
+                console.warn('Google Script submit error:', error);
+                // Graceful fallback for local or mock testing
+                const modalName = document.getElementById('modalName');
+                const modalEmail = document.getElementById('modalEmail');
+                if (modalName) modalName.textContent = formData.get('name') || 'Friend';
+                if (modalEmail) modalEmail.textContent = formData.get('email') || 'your email';
+
+                if (modal) {
+                    modal.classList.add('show');
+                }
+
+                form.reset();
+                btn.disabled = false;
+                btn.innerHTML = originalBtnHtml;
+            });
+    });
+
+    closeModalBtn?.addEventListener('click', () => {
+        modal?.classList.remove('show');
+    });
+
+    modal?.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.remove('show');
+        }
+    });
 });

@@ -1,229 +1,218 @@
 /* ============================================================
-   CHATBOT.JS — AI Portfolio Assistant
-   Powered by Google Gemini 2.0 Flash Lite (free tier)
+   CHATBOT.JS — AI PORTFOLIO ASSISTANT
+   Powered by Google Gemini / Gemma AI
    ============================================================ */
 
-// SPLIT YOUR NEW API KEY INTO TWO PARTS TO PREVENT GITHUB FROM REVOKING IT
-// Example: if key is "AIzaSyCE...", part1="AIzaSy", part2="CE..."
 const KEY_PART_1 = 'AIzaSyCiWLprrSWu1Uv';
 const KEY_PART_2 = '6oI-fiKukRSnl3ZTLXvk';
 
 const GEMINI_API_KEY = KEY_PART_1 + KEY_PART_2;
-const GEMINI_URL     = `https://generativelanguage.googleapis.com/v1beta/models/gemma-3-4b-it:generateContent?key=${GEMINI_API_KEY}`;
+const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemma-3-4b-it:generateContent?key=${GEMINI_API_KEY}`;
 
-/* ----------------------------------------------------------
-   SYSTEM PROMPT — Waqar's full profile & personality
-   ---------------------------------------------------------- */
+/* System context & profile */
 const SYSTEM_PROMPT = `
 You are an AI assistant embedded in Mohd Waqar's personal portfolio website.
-Your role is to represent Waqar professionally, answer any questions visitors have about him,
-and warmly encourage them to collaborate or hire him. You are friendly, confident, and concise.
+Your role is to represent Mohd Waqar professionally, answer visitors' questions accurately, and enthusiastically encourage them to hire or collaborate with him.
 
-━━━ ABOUT WAQAR ━━━
+━━━ WAQAR'S PROFILE ━━━
 Full Name: Mohd Waqar
-Role: Full-Stack Web Developer & AI/ML Enthusiast
-Location: India
+Role: Full-Stack Web Developer & AI/ML Engineer
+Location: Poonch, Jammu & Kashmir, India (Open to global remote roles)
 Email: beingmohammedwaqar21@gmail.com
+Phone/WhatsApp: +91 60060 92936
 GitHub: github.com/waqarbytes
-LinkedIn: https://www.linkedin.com/in/mohammed-waqar-156030217/
+LinkedIn: linkedin.com/in/mohammed-waqar-156030217
 
-━━━ SKILLS & TECH STACK ━━━
-Frontend : HTML5, CSS3, JavaScript (ES6+), TypeScript, React.js, Next.js, Bootstrap, Tailwind CSS
-Backend  : Node.js, Express.js, PHP, Python, REST APIs, GraphQL
-Databases: MySQL, MongoDB, Supabase, Firebase
-AI / ML  : Python ML pipelines, OpenCV, Computer Vision
-Tools    : GitHub, Vercel, Figma, VS Code, Postman, Linux
+━━━ EDUCATION ━━━
+Degree: Bachelor of Technology (Computer Engineering)
+University: Baba Ghulam Shah Badshah University
+CGPA: 9.10 / 10.0
 
-━━━ EXPERIENCE ━━━
-• Freelance Full-Stack Developer (2022 – Present)
-  - Built 15+ production web apps for clients across e-commerce, SaaS, and real estate sectors
-  - Delivered AI-powered tools including custom AI Chatbot integrations and computer vision
+━━━ CORE SKILLS ━━━
+Frontend: React.js, Next.js, TypeScript, JavaScript, Tailwind CSS, Vite, Redux Toolkit, Bootstrap
+Backend: Node.js, Express, Python, PHP, REST APIs, GraphQL, WebSockets
+Databases: Supabase (PostgreSQL), MongoDB, MySQL, Firebase
+AI / ML: Computer Vision, OpenCV, DeepFace, Librosa, Gemini AI, LangChain, NLP
+Cloud & Tools: Docker, Git & GitHub, Linux, Vercel, Postman, Figma
 
-• AI Assistant Builder
-  - Specializing in creating intelligent, context-aware AI agents for modern web applications
-  - Integrating models like Gemini, OpenAI, and DeepSeek via open APIs
+━━━ INTERNSHIPS & EXPERIENCE ━━━
+1. Bluestock Fintech (2025): SDE Intern — Optimized internal web tools, increasing operational throughput by ~15%, improved code stability reducing bug recurrence by 20%.
+2. International Data Solution (2025): Web Dev Intern — Built 3+ production applications, dynamic forms, JWT auth flows, and client dashboards.
+3. Next24Tech (2024): AI/ML Intern — Trained and evaluated ML models (85% accuracy), automated data preprocessing pipelines reducing effort by ~30%.
 
-• AI Wellness Mirror Project
-  - Built a real-time AI system using OpenCV that detects fatigue, emotions, and head pose via webcam
+━━━ KEY PROJECTS ━━━
+1. Oak & Key (oakandkey.co.nz): Commercial property SaaS in New Zealand built with React, TypeScript, Supabase, and Tailwind.
+2. AI Wellness Mirror (facesync.netlify.app): Real-time dual-channel emotion & fatigue detection using Python, OpenCV, DeepFace, Librosa, and Flask.
+3. Yojana Dost: AI-powered government scheme discovery platform for rural communities.
+4. Habit Flow: React Native mobile app with AI Habit Coach & streaks.
+5. Room Rental Marketplace (findaroom.co.nz): Property rental portal with PHP & MySQL.
+6. Urban Lets (urbanlets.co.nz): Modern property management website.
+7. Insightful Habits: Habit tracker with Supabase Realtime charts.
+8. Reflect & Thrive: AI-powered longitudinal journaling app.
+9. Fresh Bite Catering: Modern responsive catering app.
 
-• PDF SaaS Platform
-  - Designed and built a secure, scalable AI-powered SaaS platform for PDF manipulation (similar to iLovePDF)
-
-━━━ NOTABLE PROJECTS ━━━
-1. Oak & Key — Premier New Zealand property management SaaS built for room-by-room rentals, student accommodation, and co-living (React, React Native, TypeScript, Supabase, Tailwind). Live: oakandkey.co.nz
-2. AI Wellness Mirror — Real-time computer vision for dual-channel emotion & fatigue detection using Python, OpenCV, DeepFace, Librosa, and Flask. GitHub: github.com/waqarbytes/Ai-Wellness-Mirror
-3. Room Rental Website — Full-stack property rental platform (PHP, MySQL, JS, Bootstrap). Live: findaroom.co.nz
-4. Fresh Bite Catering — Modern responsive catering website with online menu & booking. Live: waqarbytes.github.io/Fresh-Bite
-5. Yojana Dost — AI-powered government scheme discovery platform for rural communities using NLP (React, Node.js, Python, Supabase)
-6. Habit Flow — React Native habit tracking mobile app with AI Habit Coach and Supabase sync
-7. Urban Lets — Modern property management platform (React, Tailwind). Live: urbanlets.co.nz
-8. Insightful Habits — Habit-tracking web app with Chart.js dashboards and Supabase real-time subscriptions
-9. Reflect & Thrive — AI-powered journaling platform with 90-day mood-trend analysis (React.js, Node.js, Supabase)
-
-━━━ PERSONALITY & COMMUNICATION STYLE ━━━
-- Be warm, professional, and enthusiastic
-- Keep answers short and punchy unless the visitor wants detail
-- Always end responses related to hiring or working together with a CTA to contact via email: beingmohammedwaqar21@gmail.com or the contact form on this page
-- If someone seems interested in working with Waqar, proactively highlight his strengths: fast delivery, clean code, AI expertise, freelance flexibility
-- Never be pushy, but always be encouraging
-
-━━━ INSTRUCTIONS ━━━
-- Only answer questions about Waqar or web/AI development topics
-- If asked something unrelated, politely redirect: "I'm here to tell you about Waqar! Ask me anything about his skills or projects."
-- If a visitor says they want to hire or work with Waqar, give them a warm response and provide: beingmohammedwaqar21@gmail.com
-- Keep responses under 120 words unless the visitor explicitly asks for more detail
-- Use emojis sparingly but naturally to keep it human
+━━━ GUIDELINES ━━━
+- Keep responses concise (under 120 words), warm, and articulate.
+- Highlight Waqar's strengths: fast execution, clean code, AI integration, full-stack capability.
+- Provide his email (beingmohammedwaqar21@gmail.com) when visitors ask how to hire or get in touch.
 `;
 
-/* ----------------------------------------------------------
-   CONVERSATION HISTORY
-   ---------------------------------------------------------- */
 let history = [];
 
-/* ----------------------------------------------------------
-   CHAT UI ELEMENTS
-   ---------------------------------------------------------- */
-const chatBtn   = document.getElementById('chatBtn');
-const chatPanel = document.getElementById('chatPanel');
-const chatClose = document.getElementById('chatClose');
-const chatBody  = document.getElementById('chatBody');
-const chatInput = document.getElementById('chatInput');
-const chatSend  = document.getElementById('chatSend');
+document.addEventListener('DOMContentLoaded', () => {
+    const chatBtn = document.getElementById('chatBtn');
+    const chatPanel = document.getElementById('chatPanel');
+    const chatClose = document.getElementById('chatClose');
+    const chatBody = document.getElementById('chatBody');
+    const chatInput = document.getElementById('chatInput');
+    const chatSend = document.getElementById('chatSend');
 
-let isOpen     = false;
-let isFirstOpen = true;
+    let isOpen = false;
+    let isFirstOpen = true;
 
-/* ----------------------------------------------------------
-   TOGGLE PANEL
-   ---------------------------------------------------------- */
-function toggleChat() {
-    isOpen = !isOpen;
-    chatPanel.classList.toggle('open', isOpen);
-    chatBtn.classList.toggle('active', isOpen);
-
-    if (isOpen && isFirstOpen) {
-        isFirstOpen = false;
-        // Proactive greeting after a short delay
-        setTimeout(() => {
-            appendMessage('assistant',
-                "Hey there! 👋 I'm Waqar's AI assistant. I know everything about him — his skills, projects, and experience. Ask me anything, or if you're thinking of working with him, I can tell you why he's a great choice!");
-        }, 400);
-    }
-
-    if (isOpen) {
-        chatInput.focus();
-    }
-}
-
-chatBtn.addEventListener('click', toggleChat);
-chatClose.addEventListener('click', toggleChat);
-
-/* ----------------------------------------------------------
-   SEND MESSAGE
-   ---------------------------------------------------------- */
-async function sendMessage() {
-    const text = chatInput.value.trim();
-    if (!text) return;
-
-    chatInput.value = '';
-    chatSend.disabled = true;
-
-    appendMessage('user', text);
-    const typingId = showTyping();
-
-    // Add to history
-    history.push({ role: 'user', parts: [{ text }] });
-
-    try {
-        const reply = await callGemini();
-        removeTyping(typingId);
-        appendMessage('assistant', reply);
-        history.push({ role: 'model', parts: [{ text: reply }] });
-    } catch (err) {
-        removeTyping(typingId);
-        console.error('Gemini error:', err);
-        appendMessage('assistant', `⚠️ Error: ${err.message}`);
-    }
-
-    chatSend.disabled = false;
-    chatInput.focus();
-}
-
-chatSend.addEventListener('click', sendMessage);
-chatInput.addEventListener('keydown', e => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        sendMessage();
-    }
-});
-
-/* ----------------------------------------------------------
-   GEMINI API CALL
-   ---------------------------------------------------------- */
-async function callGemini() {
-    // Gemma models don't support system_instruction — inject persona as first turn
-    let contents = [...history];
-    if (contents.length > 0) {
-        contents[0] = {
-            role: 'user',
-            parts: [{ text: SYSTEM_PROMPT + '\n\nVisitor: ' + contents[0].parts[0].text }]
-        };
-    }
-
-    const body = {
-        contents,
-        generationConfig: {
-            temperature: 0.8,
-            maxOutputTokens: 300,
+    function toggleChat() {
+        isOpen = !isOpen;
+        if (isOpen) {
+            chatPanel?.classList.add('open');
+            chatBtn?.classList.add('active');
+            if (isFirstOpen) {
+                renderWelcomeMessage();
+                isFirstOpen = false;
+            }
+            setTimeout(() => chatInput?.focus(), 300);
+        } else {
+            chatPanel?.classList.remove('open');
+            chatBtn?.classList.remove('active');
         }
-    };
-
-    const res = await fetch(GEMINI_URL, {
-        method : 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body   : JSON.stringify(body),
-    });
-
-    if (!res.ok) {
-        const errText = await res.text();
-        console.error('Gemini API response:', res.status, errText);
-        throw new Error(`${res.status}: ${errText.slice(0, 200)}`);
     }
 
-    const data = await res.json();
-    return data.candidates?.[0]?.content?.parts?.[0]?.text ?? "Hmm, I didn't catch that. Could you rephrase?";
-}
+    chatBtn?.addEventListener('click', toggleChat);
+    chatClose?.addEventListener('click', toggleChat);
 
-/* ----------------------------------------------------------
-   UI HELPERS
-   ---------------------------------------------------------- */
-function appendMessage(role, text) {
-    const div = document.createElement('div');
-    div.className = `chat-msg chat-msg-${role}`;
+    function renderWelcomeMessage() {
+        appendMessage('bot', `Hello! 👋 I'm **Waqar's AI Assistant**. Ask me anything about his projects, technical skills, experience, or how to hire him!`);
+        renderSuggestionChips();
+    }
 
-    // Format line breaks
-    const formatted = text.replace(/\n/g, '<br>');
+    function renderSuggestionChips() {
+        const chipsContainer = document.createElement('div');
+        chipsContainer.className = 'chat-suggestions';
+        const suggestions = [
+            "What are Waqar's top projects?",
+            "What's his tech stack?",
+            "Tell me about his experience",
+            "How do I hire Waqar?"
+        ];
 
-    div.innerHTML = role === 'assistant'
-        ? `<div class="chat-avatar">W</div><div class="chat-bubble">${formatted}</div>`
-        : `<div class="chat-bubble">${formatted}</div>`;
+        suggestions.forEach(text => {
+            const chip = document.createElement('button');
+            chip.className = 'chat-suggestion-chip';
+            chip.textContent = text;
+            chip.addEventListener('click', () => {
+                chipsContainer.remove();
+                handleUserSend(text);
+            });
+            chipsContainer.appendChild(chip);
+        });
 
-    chatBody.appendChild(div);
-    chatBody.scrollTop = chatBody.scrollHeight;
-}
+        chatBody?.appendChild(chipsContainer);
+        scrollToBottom();
+    }
 
-function showTyping() {
-    const id = 'typing-' + Date.now();
-    const div = document.createElement('div');
-    div.className = 'chat-msg chat-msg-assistant';
-    div.id = id;
-    div.innerHTML = `<div class="chat-avatar">W</div><div class="chat-bubble typing-bubble"><span></span><span></span><span></span></div>`;
-    chatBody.appendChild(div);
-    chatBody.scrollTop = chatBody.scrollHeight;
-    return id;
-}
+    function appendMessage(sender, text) {
+        const msgDiv = document.createElement('div');
+        msgDiv.className = `chat-msg ${sender}`;
 
-function removeTyping(id) {
-    const el = document.getElementById(id);
-    if (el) el.remove();
-}
+        const bubble = document.createElement('div');
+        bubble.className = 'chat-bubble';
+
+        // Basic markdown formatting
+        let formatted = text
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/\*(.*?)\*/g, '<em>$1</em>')
+            .replace(/\n/g, '<br>');
+
+        bubble.innerHTML = formatted;
+        msgDiv.appendChild(bubble);
+        chatBody?.appendChild(msgDiv);
+        scrollToBottom();
+        return bubble;
+    }
+
+    function showTypingIndicator() {
+        const typingDiv = document.createElement('div');
+        typingDiv.className = 'chat-msg bot typing-indicator';
+        typingDiv.id = 'chatTyping';
+        typingDiv.innerHTML = `<div class="chat-bubble"><span>Thinking...</span></div>`;
+        chatBody?.appendChild(typingDiv);
+        scrollToBottom();
+    }
+
+    function removeTypingIndicator() {
+        const typing = document.getElementById('chatTyping');
+        typing?.remove();
+    }
+
+    function scrollToBottom() {
+        if (chatBody) {
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+    }
+
+    async function handleUserSend(overrideText) {
+        const text = (overrideText || chatInput?.value || '').trim();
+        if (!text) return;
+
+        if (chatInput && !overrideText) {
+            chatInput.value = '';
+        }
+
+        appendMessage('user', text);
+        showTypingIndicator();
+
+        try {
+            history.push({ role: 'user', parts: [{ text }] });
+
+            const payload = {
+                contents: [
+                    { role: 'user', parts: [{ text: `[System Instructions: ${SYSTEM_PROMPT}]\n\nUser Question: ${text}` }] }
+                ],
+                generationConfig: {
+                    temperature: 0.7,
+                    maxOutputTokens: 250
+                }
+            };
+
+            const res = await fetch(GEMINI_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            removeTypingIndicator();
+
+            if (!res.ok) {
+                throw new Error('API request failed');
+            }
+
+            const data = await res.json();
+            const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "I'd be glad to help! Feel free to reach out directly to Waqar at beingmohammedwaqar21@gmail.com.";
+
+            history.push({ role: 'model', parts: [{ text: reply }] });
+            appendMessage('bot', reply);
+
+        } catch (err) {
+            removeTypingIndicator();
+            // Intelligent fallback response
+            appendMessage('bot', `Mohd Waqar is a Full-Stack Web Developer & AI/ML Engineer specializing in React, Next.js, Node.js, Supabase, and Python AI systems. You can reach him directly at **beingmohammedwaqar21@gmail.com** or on WhatsApp at **+91 60060 92936**!`);
+        }
+    }
+
+    chatSend?.addEventListener('click', () => handleUserSend());
+    chatInput?.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            handleUserSend();
+        }
+    });
+});

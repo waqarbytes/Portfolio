@@ -4,575 +4,969 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mohd Waqar — Web Developer & AI/ML Enthusiast</title>
-    <meta name="description" content="Portfolio of Mohd Waqar, a Full-Stack Web Developer and AI/ML enthusiast based in India.">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Mohd Waqar — Full-Stack Developer | AI & Cloud Systems</title>
+    <meta name="description" content="Portfolio of Mohd Waqar — Full-Stack Developer, AI/ML Engineer, and SaaS Builder specializing in React, Node.js, Next.js, Python, Computer Vision, and Cloud Architectures.">
+    <meta name="keywords" content="Mohd Waqar, Full-Stack Developer, Web Developer, AI ML Engineer, React, Next.js, Node.js, Python, Supabase, Cloud Native, Portfolio">
+    <meta name="robots" content="index, follow">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/44.png">
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- GSAP Animation Engine -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Phosphor & FontAwesome Icons -->
+    <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- GSAP & Lenis Smooth Scroll Engines -->
+    <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.18/dist/lenis.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <link rel="icon" type="image/png" href="44.png">
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+
+    <!-- Main Stylesheet -->
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
-    <!-- Custom Cursor -->
-    <div class="cursor-dot" id="cursorDot"></div>
-    <div class="cursor-ring" id="cursorRing"></div>
+    <!-- Custom Trailing Cursor -->
+    <div class="custom-cursor-dot" id="cursorDot"></div>
+    <div class="custom-cursor-ring" id="cursorRing"></div>
 
-    <!-- Animated Canvas Background -->
+    <!-- Ambient Canvas & Noise Grid Background -->
     <canvas id="bgCanvas"></canvas>
+    <div class="ambient-noise"></div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container"></div>
 
     <!-- ======== PRELOADER ======== -->
-    <div id="preloader">
-        <!-- Scrolling skills rows -->
-        <div class="loader-skills-wrap">
-            <div class="loader-track loader-track-1">
-                <span>HTML</span><span>CSS</span><span>JavaScript</span><span>TypeScript</span><span>React</span><span>Next.js</span><span>Node.js</span><span>Python</span><span>PHP</span><span>MySQL</span><span>MongoDB</span><span>PostgreSQL</span><span>Git</span><span>Docker</span><span>TensorFlow</span><span>Figma</span>
-                <!-- duplicate for seamless loop -->
-                <span>HTML</span><span>CSS</span><span>JavaScript</span><span>TypeScript</span><span>React</span><span>Next.js</span><span>Node.js</span><span>Python</span><span>PHP</span><span>MySQL</span><span>MongoDB</span><span>PostgreSQL</span><span>Git</span><span>Docker</span><span>TensorFlow</span><span>Figma</span>
+    <div class="preloader" id="preloader">
+        <div class="preloader-content">
+            <div class="preloader-logo">MOHD <span>WAQAR</span></div>
+            <div class="preloader-progress-wrap">
+                <div class="preloader-progress-bar" id="preloaderBar"></div>
             </div>
-            <div class="loader-track loader-track-2">
-                <span>Web Developer</span><span>AI/ML Engineer</span><span>AI Assistant Development</span><span>Full-Stack Dev</span><span>Freelancer</span><span>Problem Solver</span><span>UI Designer</span><span>Backend Dev</span><span>Mobile Dev</span>
-                <span>Web Developer</span><span>AI/ML Engineer</span><span>AI Assistant Development</span><span>Full-Stack Dev</span><span>Freelancer</span><span>Problem Solver</span><span>UI Designer</span><span>Backend Dev</span><span>Mobile Dev</span>
-            </div>
-            <div class="loader-track loader-track-3">
-                <span>Supabase</span><span>Bootstrap</span><span>Tailwind</span><span>React Native</span><span>VS Code</span><span>GitHub</span><span>Vercel</span><span>Firebase</span><span>REST API</span><span>GraphQL</span><span>Linux</span><span>Nginx</span><span>Redux</span><span>Socket.io</span>
-                <span>Supabase</span><span>Bootstrap</span><span>Tailwind</span><span>React Native</span><span>VS Code</span><span>GitHub</span><span>Vercel</span><span>Firebase</span><span>REST API</span><span>GraphQL</span><span>Linux</span><span>Nginx</span><span>Redux</span><span>Socket.io</span>
-            </div>
-        </div>
-
-        <!-- Dark overlay on top of skills -->
-        <div class="loader-overlay"></div>
-
-        <!-- Center content -->
-        <div class="loader-center">
-            <p class="loader-name">MOHD WAQAR</p>
-            <div class="loader-bar-wrap">
-                <div class="loader-bar" id="loaderBar"></div>
-            </div>
-            <p class="loader-pct" id="loaderPct">0%</p>
+            <div class="preloader-percent" id="preloaderPct">0%</div>
         </div>
     </div>
     <!-- ======== END PRELOADER ======== -->
 
-    <!-- Navbar -->
+    <!-- ======== HEADER & NAVBAR ======== -->
+    <header class="site-header" id="siteHeader">
+        <div class="site-container-fluid">
+            <nav class="navbar">
+                <!-- Logo Mark -->
+                <div class="header-logo-box">
+                    <a href="#home" class="nav-logo" aria-label="Mohd Waqar Home">
+                        <div class="nav-logo-mark">MW</div>
+                        <span class="nav-logo-text">Mohd Waqar</span>
+                    </a>
+                </div>
 
-    <header id="header">
-        <nav class="navbar">
-            <div class="nav-logo">
-                <a href="#home">MW /&gt;</a>
-            </div>
-            <div class="nav-email">
-                <a href="mailto:beingmohammedwaqar21@gmail.com">beingmohammedwaqar21@gmail.com</a>
-            </div>
-            <ul class="nav-links" id="nav-links">
-                <li><a href="#about">ABOUT</a></li>
-                <li><a href="#work">WORK</a></li>
-                <li><a href="#contact">CONTACT</a></li>
-            </ul>
-            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
-                <span></span><span></span><span></span>
-            </button>
-        </nav>
+                <!-- Center Social Icon Buttons (Exact match to Satwaj) -->
+                <div class="header-center-socials">
+                    <a href="https://github.com/waqarbytes" target="_blank" rel="noopener noreferrer" class="header-social-box" aria-label="GitHub">
+                        <i class="ph-bold ph-github-logo"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/mohammed-waqar-156030217/" target="_blank" rel="noopener noreferrer" class="header-social-box" aria-label="LinkedIn">
+                        <i class="ph-bold ph-linkedin-logo"></i>
+                    </a>
+                    <a href="mailto:beingmohammedwaqar21@gmail.com" class="header-social-box" aria-label="Email">
+                        <i class="ph-bold ph-envelope-simple"></i>
+                    </a>
+                    <a href="tel:+916006092936" class="header-social-box" aria-label="Phone">
+                        <i class="ph-bold ph-phone"></i>
+                    </a>
+                </div>
+
+                <!-- Right Action Buttons -->
+                <div class="nav-actions">
+                    <button class="nav-hamburger-box" id="openOffcanvasBtn" aria-label="Open Navigation Menu">
+                        <i class="ph-bold ph-squares-four"></i>
+                    </button>
+                    <a href="Mohd_Waqar Resume1.pdf" class="btn-cv-black" target="_blank" rel="noopener noreferrer">
+                        <span class="btn-cv-text-full">DOWNLOAD CV</span>
+                        <span class="btn-cv-text-short">CV</span>
+                        <span class="btn-dot-lime"></span>
+                    </a>
+                </div>
+            </nav>
+        </div>
     </header>
+    <!-- ======== END HEADER ======== -->
 
-    <!-- Left Social Sidebar -->
-    <aside class="social-sidebar">
-        <a href="https://github.com/waqarbytes" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-            <i class="fab fa-github"></i>
-        </a>
-        <a href="https://www.linkedin.com/in/mohammed-waqar-156030217/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-            <i class="fab fa-linkedin-in"></i>
-        </a>
-        <a href="https://twitter.com/waqarbytes" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-            <i class="fab fa-twitter"></i>
-        </a>
-        <a href="mailto:beingmohammedwaqar21@gmail.com" aria-label="Email">
-            <i class="fas fa-envelope"></i>
-        </a>
-        <div class="sidebar-line"></div>
-    </aside>
-
-    <!-- Resume FAB -->
-    <a href="resumewaqar.pdf" class="resume-fab" target="_blank" rel="noopener noreferrer">
-        RESUME <i class="fas fa-file-alt"></i>
-    </a>
-
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-orb hero-orb-1"></div>
-        <div class="hero-orb hero-orb-2"></div>
-        <div class="hero-content">
-            <p class="hero-greeting">Hello! I'm</p>
-            <h1 class="hero-name">MOHD WAQAR</h1>
-            <p class="hero-role-label">A</p>
-            <div class="hero-roles">
-                <span class="role-text" id="heroRole">WEB DEVELOPER</span>
-            </div>
-        </div>
-        <div class="hero-scroll">
-            <div class="scroll-icon">
-                <i class="fas fa-mouse"></i>
-            </div>
-            <span>Scroll Down</span>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="about" id="about">
-        <div class="about-orb"></div>
-        <div class="container">
-            <div class="about-content">
-                <div class="about-image-col">
-                    <div class="about-img-wrapper">
-                        <img src="images/photo.jpeg" alt="Mohd Waqar">
-                    </div>
-                    <div class="about-stats">
-                        <div class="stat">
-                            <span class="stat-number">3+</span>
-                            <span class="stat-label">Internships</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">15+</span>
-                            <span class="stat-label">Projects</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">50+</span>
-                            <span class="stat-label">GitHub Commits</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="about-text-col">
-                    <p class="section-label">// about me</p>
-                    <h2 class="about-heading">Crafting <span class="accent">Digital Experiences</span><br>with Code & Creativity</h2>
-                    <p class="about-desc">I'm a passionate full-stack web developer and AI/ML enthusiast currently pursuing my Bachelor's in Computer Engineering at Baba Ghulam Shah Badshah University. I specialize in building responsive web apps, <span class="accent">AI Assistant integrations</span>, and optimizing machine learning pipelines. Experience gained through internships at Bluestock Fintech, International Data Solution, and Next24Tech.</p>
-                    <div class="about-cta">
-                        <a href="Mohd_Waqar Resume1.pdf" class="btn-primary" target="_blank">Download CV <i class="fas fa-arrow-up-right-from-square"></i></a>
-                        <a href="#contact" class="btn-outline">Let's Talk <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Experience Section -->
-    <section class="experience" id="experience">
-        <div class="container">
-            <p class="section-label center">// my career &amp; experience</p>
-            <h2 class="section-heading center">My career &amp; <span class="accent">experience</span></h2>
-
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="tl-left">
-                        <h3>Software Development</h3>
-                        <h3>Engineer Intern</h3>
-                        <span class="tl-type">Full-time Internship</span>
-                        <span class="tl-company">Bluestock Fintech</span>
-                    </div>
-                    <div class="tl-center">
-                        <div class="tl-dot"></div>
-                        <div class="tl-line"></div>
-                        <span class="tl-year">2025</span>
-                    </div>
-                    <div class="tl-right">
-                        <p>Developed and optimized internal web tools, improving operational efficiency by ~15%. Strengthened code quality and stability, reducing bug recurrence by 20%. Collaborated with cross-functional teams to deliver production-ready features.</p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="tl-left">
-                        <h3>Web Development</h3>
-                        <h3>Intern</h3>
-                        <span class="tl-type">Full-time Internship</span>
-                        <span class="tl-company">International Data Solution</span>
-                    </div>
-                    <div class="tl-center">
-                        <div class="tl-dot"></div>
-                        <div class="tl-line"></div>
-                        <span class="tl-year">2025</span>
-                    </div>
-                    <div class="tl-right">
-                        <p>Built responsive, cross-browser web applications aligned with client requirements. Delivered 3+ production-ready applications in collaboration with design and backend teams. Contributed to live client projects with dynamic forms, authentication systems, and dashboard analytics.</p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="tl-left">
-                        <h3>AI/ML Development</h3>
-                        <h3>Intern</h3>
-                        <span class="tl-type">Full-time Internship</span>
-                        <span class="tl-company">Next24Tech</span>
-                    </div>
-                    <div class="tl-center">
-                        <div class="tl-dot"></div>
-                        <div class="tl-line"></div>
-                        <span class="tl-year">2024</span>
-                    </div>
-                    <div class="tl-right">
-                        <p>Designed and evaluated machine learning models achieving up to 85% accuracy. Automated data preprocessing pipelines, reducing manual processing effort by ~30%. Gained practical experience deploying AI models and collaborating with cross-functional teams.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Work / Projects Section -->
-    <section class="work" id="work">
-        <div class="work-grid-bg"></div>
-        <div class="container">
-            <p class="section-label center">// selected projects</p>
-            <h2 class="section-heading center">My <span class="accent">Work</span></h2>
-
-            <!-- Project 01 — Oak & Key -->
-            <div class="project-card">
-                <div class="project-image">
-                    <img src="images/oakandkey.png" alt="Oak & Key">
-                </div>
-                <div class="project-info">
-                    <span class="project-num">01</span>
-                    <h3 class="project-title">Oak & Key</h3>
-                    <p class="project-cat">Property Management SaaS Platform</p>
-                    <p class="project-about">New Zealand's premier property management software built specifically for room-by-room rentals, student accommodation, and co-living properties. Features real-time tenancy dashboards, compliance monitoring, digital inspection report generation, and automated rental invoicing.</p>
-                    <div class="project-tools">
-                        <span class="tool-tag">React.js</span>
-                        <span class="tool-tag">React Native</span>
-                        <span class="tool-tag">TypeScript</span>
-                        <span class="tool-tag">Supabase</span>
-                        <span class="tool-tag">Tailwind CSS</span>
-                        <span class="tool-tag">Vite</span>
-                    </div>
-                    <a href="https://oakandkey.co.nz/" target="_blank" rel="noopener noreferrer" class="project-link-btn">View Project <i class="fas fa-arrow-up-right-from-square"></i></a>
-                </div>
+    <!-- ======== OFFCANVAS MENU DRAWER ======== -->
+    <div class="offcanvas-overlay" id="offcanvasOverlay">
+        <div class="offcanvas-drawer">
+            <div class="offcanvas-top">
+                <a href="#home" class="brand-badge-box">
+                    <span class="brand-bracket">[</span>
+                    <span class="brand-initials">MW</span>
+                    <span class="brand-bracket">]</span>
+                </a>
+                <button class="offcanvas-close-btn" id="closeOffcanvasBtn" aria-label="Close Menu">
+                    <i class="ph-bold ph-x"></i>
+                </button>
             </div>
 
-            <!-- Project 02 — AI Wellness Mirror -->
-            <div class="project-card reverse">
-                <div class="project-image">
-                    <img src="images/ai_wellness_mirror.png" alt="AI Wellness Mirror">
-                </div>
-                <div class="project-info">
-                    <span class="project-num">02</span>
-                    <h3 class="project-title">AI Wellness Mirror</h3>
-                    <p class="project-cat">Real-Time AI / Computer Vision</p>
-                    <p class="project-about">Real-time dual-channel emotion detection — facial expressions (OpenCV + DeepFace) and vocal tone (Librosa + MFCC) analysed simultaneously. Confidence-weighted ensemble fusion improved wellness assessment accuracy by ~18% over single-modality baselines. Live Flask dashboard displays emotion state, stress indicators, and session history.</p>
-                    <div class="project-tools">
-                        <span class="tool-tag">Python</span>
-                        <span class="tool-tag">OpenCV</span>
-                        <span class="tool-tag">DeepFace</span>
-                        <span class="tool-tag">Librosa</span>
-                        <span class="tool-tag">Flask</span>
+            <nav class="offcanvas-nav">
+                <a href="#home" class="offcanvas-link"><span>01. Home</span> <i class="ph-bold ph-arrow-up-right"></i></a>
+                <a href="#about" class="offcanvas-link"><span>02. About</span> <i class="ph-bold ph-arrow-up-right"></i></a>
+                <a href="#services" class="offcanvas-link"><span>03. Services</span> <i class="ph-bold ph-arrow-up-right"></i></a>
+                <a href="#projects" class="offcanvas-link"><span>04. Projects</span> <i class="ph-bold ph-arrow-up-right"></i></a>
+                <a href="#skills" class="offcanvas-link"><span>05. Tech Stack</span> <i class="ph-bold ph-arrow-up-right"></i></a>
+                <a href="#experience" class="offcanvas-link"><span>06. Experience</span> <i class="ph-bold ph-arrow-up-right"></i></a>
+                <a href="#contact" class="offcanvas-link"><span>07. Contact</span> <i class="ph-bold ph-arrow-up-right"></i></a>
+            </nav>
+
+            <div class="offcanvas-contact">
+                <h4>GET IN TOUCH</h4>
+                <div class="offcanvas-contact-list">
+                    <a href="mailto:beingmohammedwaqar21@gmail.com" class="offcanvas-contact-item">
+                        <i class="ph-bold ph-envelope"></i> beingmohammedwaqar21@gmail.com
+                    </a>
+                    <a href="tel:+916006092936" class="offcanvas-contact-item">
+                        <i class="ph-bold ph-phone"></i> +91 60060 92936
+                    </a>
+                    <div class="offcanvas-contact-item">
+                        <i class="ph-bold ph-map-pin"></i> Jammu & Kashmir, India
                     </div>
-                    <a href="https://facesync.netlify.app/" target="_blank" rel="noopener noreferrer" class="project-link-btn">View Live <i class="fab fa-github"></i></a>
+                </div>
+
+                <div class="offcanvas-socials">
+                    <a href="https://github.com/waqarbytes" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                        <i class="ph-bold ph-github-logo"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/mohammed-waqar-156030217/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                        <i class="ph-bold ph-linkedin-logo"></i>
+                    </a>
+                    <a href="mailto:beingmohammedwaqar21@gmail.com" aria-label="Email">
+                        <i class="ph-bold ph-envelope-simple"></i>
+                    </a>
+                    <a href="https://wa.me/916006092936" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
                 </div>
             </div>
-
-            <!-- Project 03 -->
-            <div class="project-card">
-                <div class="project-image">
-                    <img src="images/2.png" alt="Room Rental Website">
-                </div>
-                <div class="project-info">
-                    <span class="project-num">03</span>
-                    <h3 class="project-title">Room Rental Website</h3>
-                    <p class="project-cat">Full-Stack Web Application</p>
-                    <p class="project-about">A complete property rental platform enabling landlords to list rooms and tenants to browse, filter, and apply — with authentication, dashboard analytics, and pre-tenancy applications.</p>
-                    <div class="project-tools">
-                        <span class="tool-tag">PHP</span>
-                        <span class="tool-tag">MySQL</span>
-                        <span class="tool-tag">JavaScript</span>
-                        <span class="tool-tag">Bootstrap</span>
-                    </div>
-                    <a href="https://findaroom.co.nz/" target="_blank" rel="noopener noreferrer" class="project-link-btn">View Project <i class="fas fa-arrow-up-right-from-square"></i></a>
-                </div>
-            </div>
-
-            <!-- Project 04 -->
-            <div class="project-card reverse">
-                <div class="project-image">
-                    <img src="images/1.png" alt="Fresh Bite Catering">
-                </div>
-                <div class="project-info">
-                    <span class="project-num">04</span>
-                    <h3 class="project-title">Fresh Bite Catering</h3>
-                    <p class="project-cat">Responsive Website</p>
-                    <p class="project-about">A clean and modern catering website featuring an online menu, booking form, and gallery. Designed mobile-first with smooth animations and fast performance.</p>
-                    <div class="project-tools">
-                        <span class="tool-tag">HTML</span>
-                        <span class="tool-tag">CSS</span>
-                        <span class="tool-tag">JavaScript</span>
-                    </div>
-                    <a href="https://waqarbytes.github.io/Fresh-Bite/" target="_blank" rel="noopener noreferrer" class="project-link-btn">View Project <i class="fas fa-arrow-up-right-from-square"></i></a>
-                </div>
-            </div>
-
-            <!-- Project 05 -->
-            <div class="project-card">
-                <div class="project-image">
-                    <img src="images/3.png" alt="Yojana Dost">
-                </div>
-                <div class="project-info">
-                    <span class="project-num">05</span>
-                    <h3 class="project-title">Yojana Dost</h3>
-                    <p class="project-cat">AI-Powered Platform</p>
-                    <p class="project-about">An AI-powered government scheme discovery platform built for rural communities. Uses NLP to match users with relevant schemes based on their profile and needs.</p>
-                    <div class="project-tools">
-                        <span class="tool-tag">React</span>
-                        <span class="tool-tag">Node.js</span>
-                        <span class="tool-tag">Python</span>
-                        <span class="tool-tag">Supabase</span>
-                    </div>
-                    <a href="https://yojana-dost-6ajqmnvlz-waqarbytes-projects.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-link-btn">View Project <i class="fas fa-arrow-up-right-from-square"></i></a>
-                </div>
-            </div>
-
-            <!-- Project 06 -->
-            <div class="project-card reverse">
-                <div class="project-image">
-                    <img src="images/habitflow.png" alt="Habit Flow">
-                </div>
-                <div class="project-info">
-                    <span class="project-num">06</span>
-                    <h3 class="project-title">Habit Flow</h3>
-                    <p class="project-cat">Habit Tracking App</p>
-                    <p class="project-about">A React Native habit tracking mobile app with streaks, analytics visualizations, and an AI-powered Habit Coach. Synced across devices via Supabase.</p>
-                    <div class="project-tools">
-                        <span class="tool-tag">React Native</span>
-                        <span class="tool-tag">Supabase</span>
-                        <span class="tool-tag">TypeScript</span>
-                    </div>
-                    <a href="https://github.com/waqarbytes/habit-flow" target="_blank" rel="noopener noreferrer" class="project-link-btn">View on GitHub <i class="fab fa-github"></i></a>
-                </div>
-            </div>
-
-            <!-- Project 07 -->
-            <div class="project-card">
-                <div class="project-image">
-                    <img src="images/urbanlets.png" alt="Urban Lets">
-                </div>
-                <div class="project-info">
-                    <span class="project-num">07</span>
-                    <h3 class="project-title">Urban Lets</h3>
-                    <p class="project-cat">Property Management Website</p>
-                    <p class="project-about">A modern and comprehensive property management platform featuring owner services, tenant resources, and clean responsive design.</p>
-                    <div class="project-tools">
-                        <span class="tool-tag">React</span>
-                        <span class="tool-tag">Tailwind</span>
-                        <span class="tool-tag">JavaScript</span>
-                    </div>
-                    <a href="https://urbanlets.co.nz/" target="_blank" rel="noopener noreferrer" class="project-link-btn">View Project <i class="fas fa-arrow-up-right-from-square"></i></a>
-                </div>
-            </div>
-
-            <!-- Project 08 -->
-            <div class="project-card reverse">
-                <div class="project-image">
-                    <img src="images/insightful_habits.png" alt="Insightful Habits">
-                </div>
-                <div class="project-info">
-                    <span class="project-num">08</span>
-                    <h3 class="project-title">Insightful Habits</h3>
-                    <p class="project-cat">Habit Tracking Web App</p>
-                    <p class="project-about">A habit-tracking web app analyzing 100+ structured daily entries with visual consistency and completion-rate dashboards. Includes Supabase real-time subscriptions for live streak updates — 15 beta users reported 40% improvement in habit awareness.</p>
-                    <div class="project-tools">
-                        <span class="tool-tag">React.js</span>
-                        <span class="tool-tag">Chart.js</span>
-                        <span class="tool-tag">Node.js</span>
-                        <span class="tool-tag">Supabase</span>
-                    </div>
-                    <a href="https://github.com/waqarbytes" target="_blank" rel="noopener noreferrer" class="project-link-btn">View on GitHub <i class="fab fa-github"></i></a>
-                </div>
-            </div>
-
-            <!-- Project 09 -->
-            <div class="project-card">
-                <div class="project-image">
-                    <img src="images/reflect_thrive.png" alt="Reflect &amp; Thrive">
-                </div>
-                <div class="project-info">
-                    <span class="project-num">09</span>
-                    <h3 class="project-title">Reflect &amp; Thrive</h3>
-                    <p class="project-cat">AI-Powered Journaling Platform</p>
-                    <p class="project-about">A journaling platform featuring AI-powered session summaries, structured timestamped entries, and streaks to encourage consistent reflection. Includes 90-day mood-trend analysis for longitudinal behavioral pattern tracking.</p>
-                    <div class="project-tools">
-                        <span class="tool-tag">React.js</span>
-                        <span class="tool-tag">Node.js</span>
-                        <span class="tool-tag">Supabase</span>
-                    </div>
-                    <a href="https://github.com/waqarbytes" target="_blank" rel="noopener noreferrer" class="project-link-btn">View on GitHub <i class="fab fa-github"></i></a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Tech Stack Section -->
-    <section class="techstack" id="skills">
-        <div class="container">
-            <p class="section-label center">// technologies I use</p>
-            <h2 class="section-heading center">TECH <span class="accent">STACK</span></h2>
-
-            <div class="tech-grid">
-                <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5"><span>HTML</span></div>
-                <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3"><span>CSS</span></div>
-                <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript"><span>JavaScript</span></div>
-                <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript"><span>TypeScript</span></div>
-                <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React"><span>React</span></div>
-                <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt="Next.js"><span>Next.js</span></div>
-                <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js"><span>Node.js</span></div>
-                <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"><span>Python</span></div>
-                <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP"><span>PHP</span></div>
-                <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL"><span>MySQL</span></div>
-                <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB"><span>MongoDB</span></div>
-                <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg" alt="Supabase"><span>Supabase</span></div>
-                <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub"><span>GitHub</span></div>
-                <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/opencv/opencv-original.svg" alt="OpenCV"><span>OpenCV</span></div>
-                <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma"><span>Figma</span></div>
-                <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code"><span>VS Code</span></div>
-            </div>
-
-            <div class="techstack-cta">
-                <a href="https://github.com/waqarbytes" target="_blank" rel="noopener noreferrer" class="btn-outline">Play With Me <i class="fas fa-arrow-right"></i></a>
-                <a href="#contact" class="btn-primary">Hire Me <i class="fas fa-arrow-right"></i></a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Certifications Section -->
-    <section class="certifications" id="certifications">
-        <div class="container">
-            <p class="section-label center">// achievements</p>
-            <h2 class="section-heading center">Certifications &amp; <span class="accent">Awards</span></h2>
-            <div class="cert-grid">
-                <div class="cert-card">
-                    <div class="cert-icon">
-                        <i class="fas fa-cloud"></i>
-                    </div>
-                    <div class="cert-info">
-                        <h3 class="cert-title">Azure AI &amp; Cloud</h3>
-                        <p class="cert-issuer">IBM Training Program</p>
-                        <p class="cert-date">March 2026</p>
-                        <p class="cert-desc">Focused on cloud computing, AI services, and the Microsoft Azure platform including Azure AI Cognitive Services and Azure Storage.</p>
-                    </div>
-                    <div class="cert-badge">CERTIFIED</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact / Footer Section -->
-    <footer class="footer" id="contact">
-        <div class="footer-orb"></div>
-        <div class="container">
-            <div class="footer-form-section">
-                <p class="section-label center">// get in touch</p>
-                <h2 class="section-heading center">Let's <span class="accent">Connect</span></h2>
-
-                <form id="contactForm" class="contact-form">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <input type="text" id="name" name="name" placeholder="Your Name" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" id="email" name="email" placeholder="Your Email" required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="subject" name="subject" placeholder="Subject" required>
-                    </div>
-                    <div class="form-group">
-                        <textarea id="message" name="message" placeholder="Your Message" required></textarea>
-                    </div>
-                    <button type="submit" class="submit-btn btn-primary">Send Message <i class="fas fa-paper-plane"></i></button>
-                </form>
-            </div>
-
-            <div class="footer-bottom">
-                <div class="footer-name">MOHD WAQAR</div>
-                <div class="footer-cols">
-                    <div class="footer-col">
-                        <span class="footer-col-label">Email</span>
-                        <a href="mailto:beingmohammedwaqar21@gmail.com">beingmohammedwaqar21@gmail.com</a>
-                        <span class="footer-col-label" style="margin-top:20px;">Location</span>
-                        <span>Poonch, J&amp;K, India</span>
-                    </div>
-                    <div class="footer-col">
-                        <span class="footer-col-label">Social</span>
-                        <a href="https://github.com/waqarbytes" target="_blank" rel="noopener noreferrer">Github <i class="fas fa-arrow-up-right-from-square"></i></a>
-                        <a href="https://www.linkedin.com/in/mohammed-waqar-156030217/" target="_blank" rel="noopener noreferrer">LinkedIn <i class="fas fa-arrow-up-right-from-square"></i></a>
-                        <a href="https://twitter.com/waqarbytes" target="_blank" rel="noopener noreferrer">Twitter <i class="fas fa-arrow-up-right-from-square"></i></a>
-                    </div>
-                    <div class="footer-col">
-                        <span class="footer-col-label">Designed &amp; Developed by</span>
-                        <span class="accent">Mohd Waqar</span>
-                        <span style="margin-top:20px;color:#555;">© 2026</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Success Modal -->
-    <div id="successModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-icon"><i class="fas fa-check-circle"></i></div>
-            <h3>Message Sent!</h3>
-            <p>Thank you, <span id="modalName"></span>! I'll get back to you at <span id="modalEmail"></span> shortly.</p>
-            <button class="close-btn btn-primary" id="closeModalBtn">Awesome!</button>
         </div>
     </div>
+    <!-- ======== END OFFCANVAS MENU DRAWER ======== -->
 
-    <!-- WhatsApp Floating Button -->
+    <main>
+        <!-- ======== HERO SECTION (MATCHING SATWAJ EXACTLY) ======== -->
+        <section class="banner-hero-area" id="home">
+            <div class="banner-hero-wrapper">
+                
+                <!-- Giant Black DEVELOPER Text -->
+                <h1 class="banner-hero-title">DEVELOPER</h1>
+
+                <!-- Center Portrait Cutout Standing -->
+                <div class="banner-hero-man">
+                    <img src="images/waqar-hero.png" alt="Mohd Waqar — Full-Stack Developer">
+                </div>
+
+                <!-- 3-Column Floating Grid -->
+                <div class="site-container-fluid banner-content-wrap">
+                    <div class="banner-grid-row">
+                        
+                        <!-- Left White Card -->
+                        <div class="banner-left-card">
+                            <h2 class="banner-left-title">
+                                HELLO! I'M MOHD WAQAR. A FULL-STACK DEVELOPER AND AI BUILDER FROM INDIA.
+                            </h2>
+                            <ul class="banner-left-list">
+                                <li><i class="ph-bold ph-plus"></i> Web Development</li>
+                                <li><i class="ph-bold ph-plus"></i> AI / GenAI</li>
+                                <li><i class="ph-bold ph-plus"></i> Cloud &amp; DevOps</li>
+                                <li><i class="ph-bold ph-plus"></i> Microservices</li>
+                                <li><i class="ph-bold ph-plus"></i> Performance Optimization</li>
+                            </ul>
+                        </div>
+
+                        <!-- Center Bottom Heading & Button (positioned cleanly below the photo) -->
+                        <div class="banner-center-box">
+                            <h3 class="banner-center-heading">
+                                Full-stack, cloud-native and AI-powered development made better.
+                            </h3>
+                            <div class="banner-center-btn-wrap">
+                                <a href="#projects" class="btn-cv-black btn-view-projects">
+                                    <span>VIEW PROJECTS</span>
+                                    <span class="btn-dot-lime"></span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Right Stats Column (Stacked White/Black Cards) -->
+                        <div class="banner-right-stats">
+                            <div class="banner-stat-card card-white">
+                                <h4 class="stat-num-val"><span class="counter-num">15</span>+</h4>
+                                <p class="stat-text-label">Featured Projects</p>
+                            </div>
+                            <div class="banner-stat-card card-black">
+                                <h4 class="stat-num-val text-white"><span class="counter-num">3</span>+</h4>
+                                <p class="stat-text-label text-white">Internships</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ======== END HERO SECTION ======== -->
+
+        <!-- ======== ABOUT SECTION ======== -->
+        <section class="section-padding about-section" id="about">
+            <div class="site-container">
+                <div class="about-statement">
+                    I build scalable, cloud-native and <span>AI-powered web applications</span> with a focus on clean engineering, performance, and memorable user experience.
+                </div>
+
+                <div class="about-grid">
+                    <div class="about-photo-wrapper">
+                        <img src="images/photo.jpeg" alt="Mohd Waqar" class="about-photo">
+                        <div class="about-photo-badge">
+                            <div>
+                                <h4>Mohd Waqar</h4>
+                                <p>Software Engineer · Web &amp; AI</p>
+                            </div>
+                            <a href="Mohd_Waqar Resume1.pdf" target="_blank" class="btn-magnetic btn-lime" style="padding: 8px 18px; font-size: 0.8rem;">
+                                <span>CV</span>
+                                <i class="ph ph-arrow-up-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="about-info-col">
+                        <div class="section-eyebrow"><i class="ph ph-user"></i> About Me</div>
+                        <p class="about-paragraph">
+                            I am a passionate <strong>Full-Stack Web Developer and AI/ML Engineer</strong> pursuing my Bachelor’s in Computer Engineering at <strong>Baba Ghulam Shah Badshah University</strong>. I specialize in building reactive client interfaces, robust backend microservices, real-time architectures, and integrating autonomous AI agents.
+                        </p>
+                        <p class="about-paragraph">
+                            My hands-on experience spans across production internships at <strong>Bluestock Fintech</strong>, <strong>International Data Solution</strong>, and <strong>Next24Tech</strong>, where I spearheaded internal web optimizations, designed computer vision pipelines, and deployed scalable client solutions.
+                        </p>
+                        <p class="about-paragraph">
+                            From architecting SaaS property platforms in New Zealand (<strong>Oak &amp; Key</strong>) to building multimodal emotion analysis suites (<strong>AI Wellness Mirror</strong>), I thrive on turning complex problems into elegant, high-impact products.
+                        </p>
+
+                        <div class="about-meta-cards">
+                            <div class="about-meta-card">
+                                <h5>Education</h5>
+                                <p>B.Tech in Computer Engineering (9.10 CGPA)</p>
+                            </div>
+                            <div class="about-meta-card">
+                                <h5>Location</h5>
+                                <p>Poonch, J&amp;K, India (Open to Remote)</p>
+                            </div>
+                            <div class="about-meta-card">
+                                <h5>Internships</h5>
+                                <p>3 Completed at High-Growth Startups</p>
+                            </div>
+                            <div class="about-meta-card">
+                                <h5>Core Focus</h5>
+                                <p>React, Next.js, Node.js, Python, AI Agents</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ======== END ABOUT SECTION ======== -->
+
+        <!-- ======== KINETIC MARQUEE SECTION ======== -->
+        <div class="marquee-wrap">
+            <div class="marquee-track">
+                <div class="marquee-item">Services <span class="dot">•</span> <span class="stroke-text">Capabilities</span> <span class="dot">•</span> Full Stack <span class="dot">•</span> <span class="stroke-text">AI &amp; GenAI</span> <span class="dot">•</span> Cloud Systems <span class="dot">•</span> <span class="stroke-text">Real-Time APIs</span> <span class="dot">•</span></div>
+                <div class="marquee-item">Services <span class="dot">•</span> <span class="stroke-text">Capabilities</span> <span class="dot">•</span> Full Stack <span class="dot">•</span> <span class="stroke-text">AI &amp; GenAI</span> <span class="dot">•</span> Cloud Systems <span class="dot">•</span> <span class="stroke-text">Real-Time APIs</span> <span class="dot">•</span></div>
+            </div>
+        </div>
+        <!-- ======== END MARQUEE SECTION ======== -->
+
+        <!-- ======== SERVICES / EXPERTISE SECTION ======== -->
+        <section class="section-padding services-section" id="services">
+            <div class="site-container">
+                <div class="section-header">
+                    <span class="section-eyebrow"><i class="ph ph-sparkle"></i> What I Do</span>
+                    <h2 class="section-title">Engineered for <span class="text-gradient">Performance &amp; Scale</span></h2>
+                    <p class="section-subtitle">Delivering end-to-end software solutions from responsive frontend interfaces to scalable backend microservices and intelligent AI models.</p>
+                </div>
+
+                <div class="services-list">
+                    <!-- Service 01 -->
+                    <div class="service-row" data-service="frontend">
+                        <div class="service-left">
+                            <span class="service-number">01</span>
+                            <div class="service-content">
+                                <h3>Frontend Engineering &amp; Modern Web Apps</h3>
+                                <p>Building lightning-fast, accessible, and responsive user interfaces with smooth animations, state management, and modern component design systems.</p>
+                                <div class="service-tags">
+                                    <span class="service-tag">React.js</span>
+                                    <span class="service-tag">Next.js</span>
+                                    <span class="service-tag">TypeScript</span>
+                                    <span class="service-tag">Tailwind CSS</span>
+                                    <span class="service-tag">Vite</span>
+                                    <span class="service-tag">Redux Toolkit</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="service-arrow"><i class="ph ph-arrow-up-right"></i></div>
+                    </div>
+
+                    <!-- Service 02 -->
+                    <div class="service-row" data-service="backend">
+                        <div class="service-left">
+                            <span class="service-number">02</span>
+                            <div class="service-content">
+                                <h3>Backend Systems &amp; Cloud REST/GraphQL APIs</h3>
+                                <p>Architecting secure, resilient server backends, database models, authentication flows (OAuth &amp; JWT), and asynchronous event pipelines.</p>
+                                <div class="service-tags">
+                                    <span class="service-tag">Node.js</span>
+                                    <span class="service-tag">Express</span>
+                                    <span class="service-tag">Python</span>
+                                    <span class="service-tag">Supabase</span>
+                                    <span class="service-tag">MongoDB</span>
+                                    <span class="service-tag">PostgreSQL / MySQL</span>
+                                    <span class="service-tag">WebSockets</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="service-arrow"><i class="ph ph-arrow-up-right"></i></div>
+                    </div>
+
+                    <!-- Service 03 -->
+                    <div class="service-row" data-service="ai">
+                        <div class="service-left">
+                            <span class="service-number">03</span>
+                            <div class="service-content">
+                                <h3>AI, Machine Learning &amp; Computer Vision</h3>
+                                <p>Designing predictive models, computer vision systems (OpenCV &amp; DeepFace), and context-aware LLM agents powered by Gemini, OpenAI, and LangChain.</p>
+                                <div class="service-tags">
+                                    <span class="service-tag">OpenCV</span>
+                                    <span class="service-tag">DeepFace</span>
+                                    <span class="service-tag">Gemini API</span>
+                                    <span class="service-tag">Flask / FastAPI</span>
+                                    <span class="service-tag">Librosa</span>
+                                    <span class="service-tag">NLP Pipelines</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="service-arrow"><i class="ph ph-arrow-up-right"></i></div>
+                    </div>
+
+                    <!-- Service 04 -->
+                    <div class="service-row" data-service="saas">
+                        <div class="service-left">
+                            <span class="service-number">04</span>
+                            <div class="service-content">
+                                <h3>SaaS &amp; Cross-Platform Product Engineering</h3>
+                                <p>Transforming concepts into commercially viable multi-tenant SaaS platforms with automated billing, analytics dashboards, and mobile clients.</p>
+                                <div class="service-tags">
+                                    <span class="service-tag">React Native</span>
+                                    <span class="service-tag">SaaS Architecture</span>
+                                    <span class="service-tag">Payment Integration</span>
+                                    <span class="service-tag">Docker</span>
+                                    <span class="service-tag">CI/CD</span>
+                                    <span class="service-tag">Vercel</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="service-arrow"><i class="ph ph-arrow-up-right"></i></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ======== END SERVICES SECTION ======== -->
+
+        <!-- ======== SELECTED PROJECTS SECTION ======== -->
+        <section class="section-padding projects-section" id="projects">
+            <div class="site-container">
+                <div class="section-header center">
+                    <span class="section-eyebrow"><i class="ph ph-folder-open"></i> Portfolio Showcase</span>
+                    <h2 class="section-title">Projects that Move from <span class="text-gradient">Idea to Product</span></h2>
+                    <p class="section-subtitle">A curated collection of production web applications, SaaS platforms, AI systems, and mobile clients.</p>
+                </div>
+
+                <!-- Filter Controls -->
+                <div class="project-filter-wrap">
+                    <button class="filter-btn active" data-filter="all">All Projects</button>
+                    <button class="filter-btn" data-filter="ai">AI &amp; Machine Learning</button>
+                    <button class="filter-btn" data-filter="fullstack">Full-Stack Web</button>
+                    <button class="filter-btn" data-filter="saas">SaaS &amp; Mobile</button>
+                </div>
+
+                <!-- Projects Grid -->
+                <div class="projects-grid">
+                    <!-- Project 01: Oak & Key -->
+                    <article class="project-card" data-category="saas" data-project-id="oakandkey">
+                        <div class="project-media" data-case-study="oakandkey">
+                            <img src="images/oakandkey.png" alt="Oak &amp; Key property management software" loading="lazy">
+                            <span class="project-index-badge">01 / 09</span>
+                            <span class="project-category-corner">SAAS · PROPERTY MGMT</span>
+                        </div>
+                        <div class="project-body">
+                            <div>
+                                <span class="project-kicker">Commercial SaaS · New Zealand</span>
+                                <h3 class="project-title">Oak &amp; Key Property Platform</h3>
+                                <p class="project-desc">New Zealand's premier property management SaaS platform built specifically for room-by-room rentals, student accommodation, and co-living properties with real-time tenancy dashboards.</p>
+                                <div class="project-tech-tags">
+                                    <span class="tech-tag">React.js</span>
+                                    <span class="tech-tag">TypeScript</span>
+                                    <span class="tech-tag">Supabase</span>
+                                    <span class="tech-tag">Tailwind CSS</span>
+                                    <span class="tech-tag">Vite</span>
+                                </div>
+                            </div>
+                            <div class="project-actions">
+                                <a href="javascript:void(0)" class="project-action-btn primary-action" data-case-study="oakandkey">See Details <i class="ph ph-arrow-up-right"></i></a>
+                                <a href="https://oakandkey.co.nz/" target="_blank" rel="noopener noreferrer" class="project-action-btn">Live Site <i class="ph ph-globe"></i></a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 02: AI Wellness Mirror -->
+                    <article class="project-card" data-category="ai" data-project-id="aiwellness">
+                        <div class="project-media" data-case-study="aiwellness">
+                            <img src="images/ai_wellness_mirror.png" alt="AI Wellness Mirror emotion detection" loading="lazy">
+                            <span class="project-index-badge">02 / 09</span>
+                            <span class="project-category-corner">AI · COMPUTER VISION</span>
+                        </div>
+                        <div class="project-body">
+                            <div>
+                                <span class="project-kicker">Multimodal AI · Research Project</span>
+                                <h3 class="project-title">AI Wellness Mirror</h3>
+                                <p class="project-desc">Real-time dual-channel emotion detection analysing facial expressions via OpenCV &amp; DeepFace and vocal tone via Librosa with confidence-weighted ensemble fusion.</p>
+                                <div class="project-tech-tags">
+                                    <span class="tech-tag">Python</span>
+                                    <span class="tech-tag">OpenCV</span>
+                                    <span class="tech-tag">DeepFace</span>
+                                    <span class="tech-tag">Librosa</span>
+                                    <span class="tech-tag">Flask</span>
+                                </div>
+                            </div>
+                            <div class="project-actions">
+                                <a href="javascript:void(0)" class="project-action-btn primary-action" data-case-study="aiwellness">See Details <i class="ph ph-arrow-up-right"></i></a>
+                                <a href="https://facesync.netlify.app/" target="_blank" rel="noopener noreferrer" class="project-action-btn">Live Demo <i class="ph ph-globe"></i></a>
+                                <a href="https://github.com/waqarbytes" target="_blank" rel="noopener noreferrer" class="project-action-btn">GitHub <i class="ph ph-github-logo"></i></a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 03: Yojana Dost -->
+                    <article class="project-card" data-category="ai" data-project-id="yojanadost">
+                        <div class="project-media" data-case-study="yojanadost">
+                            <img src="images/3.png" alt="Yojana Dost government scheme platform" loading="lazy">
+                            <span class="project-index-badge">03 / 09</span>
+                            <span class="project-category-corner">AI · NLP DISCOVERY</span>
+                        </div>
+                        <div class="project-body">
+                            <div>
+                                <span class="project-kicker">AI Social Innovation</span>
+                                <h3 class="project-title">Yojana Dost AI Scheme Finder</h3>
+                                <p class="project-desc">An AI-powered government scheme discovery platform built for underserved and rural communities, utilizing NLP matching to map citizens to eligible benefits.</p>
+                                <div class="project-tech-tags">
+                                    <span class="tech-tag">React</span>
+                                    <span class="tech-tag">Node.js</span>
+                                    <span class="tech-tag">Python NLP</span>
+                                    <span class="tech-tag">Supabase</span>
+                                </div>
+                            </div>
+                            <div class="project-actions">
+                                <a href="javascript:void(0)" class="project-action-btn primary-action" data-case-study="yojanadost">See Details <i class="ph ph-arrow-up-right"></i></a>
+                                <a href="https://yojana-dost-6ajqmnvlz-waqarbytes-projects.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-action-btn">Live App <i class="ph ph-globe"></i></a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 04: Habit Flow -->
+                    <article class="project-card" data-category="saas" data-project-id="habitflow">
+                        <div class="project-media" data-case-study="habitflow">
+                            <img src="images/habitflow.png" alt="Habit Flow mobile app" loading="lazy">
+                            <span class="project-index-badge">04 / 09</span>
+                            <span class="project-category-corner">MOBILE · REACT NATIVE</span>
+                        </div>
+                        <div class="project-body">
+                            <div>
+                                <span class="project-kicker">Mobile App · Cross-Platform</span>
+                                <h3 class="project-title">Habit Flow Mobile &amp; AI Coach</h3>
+                                <p class="project-desc">React Native mobile application featuring streaks, interactive progress analytics, and an integrated AI-powered Habit Coach with real-time Supabase cloud sync.</p>
+                                <div class="project-tech-tags">
+                                    <span class="tech-tag">React Native</span>
+                                    <span class="tech-tag">TypeScript</span>
+                                    <span class="tech-tag">Supabase</span>
+                                    <span class="tech-tag">AI Agent</span>
+                                </div>
+                            </div>
+                            <div class="project-actions">
+                                <a href="javascript:void(0)" class="project-action-btn primary-action" data-case-study="habitflow">See Details <i class="ph ph-arrow-up-right"></i></a>
+                                <a href="https://github.com/waqarbytes/habit-flow" target="_blank" rel="noopener noreferrer" class="project-action-btn">GitHub <i class="ph ph-github-logo"></i></a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 05: Room Rental Platform -->
+                    <article class="project-card" data-category="fullstack" data-project-id="roomrental">
+                        <div class="project-media" data-case-study="roomrental">
+                            <img src="images/2.png" alt="Room Rental Website" loading="lazy">
+                            <span class="project-index-badge">05 / 09</span>
+                            <span class="project-category-corner">FULL-STACK · PHP/MYSQL</span>
+                        </div>
+                        <div class="project-body">
+                            <div>
+                                <span class="project-kicker">Property Marketplace</span>
+                                <h3 class="project-title">Room Rental Portal (findaroom)</h3>
+                                <p class="project-desc">Comprehensive room rental platform enabling landlords to list properties and tenants to browse, filter, and submit pre-tenancy verification workflows.</p>
+                                <div class="project-tech-tags">
+                                    <span class="tech-tag">PHP</span>
+                                    <span class="tech-tag">MySQL</span>
+                                    <span class="tech-tag">JavaScript</span>
+                                    <span class="tech-tag">Bootstrap</span>
+                                </div>
+                            </div>
+                            <div class="project-actions">
+                                <a href="javascript:void(0)" class="project-action-btn primary-action" data-case-study="roomrental">See Details <i class="ph ph-arrow-up-right"></i></a>
+                                <a href="https://findaroom.co.nz/" target="_blank" rel="noopener noreferrer" class="project-action-btn">Live Site <i class="ph ph-globe"></i></a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 06: Urban Lets -->
+                    <article class="project-card" data-category="fullstack" data-project-id="urbanlets">
+                        <div class="project-media" data-case-study="urbanlets">
+                            <img src="images/urbanlets.png" alt="Urban Lets property management" loading="lazy">
+                            <span class="project-index-badge">06 / 09</span>
+                            <span class="project-category-corner">FULL-STACK · REACT</span>
+                        </div>
+                        <div class="project-body">
+                            <div>
+                                <span class="project-kicker">Client Production Build</span>
+                                <h3 class="project-title">Urban Lets Property Management</h3>
+                                <p class="project-desc">A modern and comprehensive property management platform featuring owner services, tenant management resources, and clean responsive design.</p>
+                                <div class="project-tech-tags">
+                                    <span class="tech-tag">React</span>
+                                    <span class="tech-tag">Tailwind</span>
+                                    <span class="tech-tag">JavaScript</span>
+                                </div>
+                            </div>
+                            <div class="project-actions">
+                                <a href="javascript:void(0)" class="project-action-btn primary-action" data-case-study="urbanlets">See Details <i class="ph ph-arrow-up-right"></i></a>
+                                <a href="https://urbanlets.co.nz/" target="_blank" rel="noopener noreferrer" class="project-action-btn">Live Site <i class="ph ph-globe"></i></a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 07: Insightful Habits -->
+                    <article class="project-card" data-category="saas" data-project-id="insightfulhabits">
+                        <div class="project-media" data-case-study="insightfulhabits">
+                            <img src="images/insightful_habits.png" alt="Insightful Habits analytics app" loading="lazy">
+                            <span class="project-index-badge">07 / 09</span>
+                            <span class="project-category-corner">ANALYTICS · REAL-TIME</span>
+                        </div>
+                        <div class="project-body">
+                            <div>
+                                <span class="project-kicker">Productivity Web App</span>
+                                <h3 class="project-title">Insightful Habits Analytics</h3>
+                                <p class="project-desc">A habit-tracking web app analyzing 100+ daily entries with visual consistency charts and live Supabase real-time subscriptions for streak synchronization.</p>
+                                <div class="project-tech-tags">
+                                    <span class="tech-tag">React.js</span>
+                                    <span class="tech-tag">Chart.js</span>
+                                    <span class="tech-tag">Supabase</span>
+                                    <span class="tech-tag">Node.js</span>
+                                </div>
+                            </div>
+                            <div class="project-actions">
+                                <a href="javascript:void(0)" class="project-action-btn primary-action" data-case-study="insightfulhabits">See Details <i class="ph ph-arrow-up-right"></i></a>
+                                <a href="https://github.com/waqarbytes" target="_blank" rel="noopener noreferrer" class="project-action-btn">GitHub <i class="ph ph-github-logo"></i></a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 08: Reflect & Thrive -->
+                    <article class="project-card" data-category="ai" data-project-id="reflectthrive">
+                        <div class="project-media" data-case-study="reflectthrive">
+                            <img src="images/reflect_thrive.png" alt="Reflect and Thrive journaling" loading="lazy">
+                            <span class="project-index-badge">08 / 09</span>
+                            <span class="project-category-corner">AI · JOURNALING</span>
+                        </div>
+                        <div class="project-body">
+                            <div>
+                                <span class="project-kicker">Mindfulness Platform</span>
+                                <h3 class="project-title">Reflect &amp; Thrive AI Journal</h3>
+                                <p class="project-desc">A journaling platform featuring AI-powered session summaries, structured timestamped entries, and 90-day mood-trend longitudinal behavioral analysis.</p>
+                                <div class="project-tech-tags">
+                                    <span class="tech-tag">React.js</span>
+                                    <span class="tech-tag">Node.js</span>
+                                    <span class="tech-tag">Supabase</span>
+                                    <span class="tech-tag">NLP Summaries</span>
+                                </div>
+                            </div>
+                            <div class="project-actions">
+                                <a href="javascript:void(0)" class="project-action-btn primary-action" data-case-study="reflectthrive">See Details <i class="ph ph-arrow-up-right"></i></a>
+                                <a href="https://github.com/waqarbytes" target="_blank" rel="noopener noreferrer" class="project-action-btn">GitHub <i class="ph ph-github-logo"></i></a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 09: Fresh Bite Catering -->
+                    <article class="project-card" data-category="fullstack" data-project-id="freshbite">
+                        <div class="project-media" data-case-study="freshbite">
+                            <img src="images/1.png" alt="Fresh Bite Catering" loading="lazy">
+                            <span class="project-index-badge">09 / 09</span>
+                            <span class="project-category-corner">FRONTEND · RESPONSIVE</span>
+                        </div>
+                        <div class="project-body">
+                            <div>
+                                <span class="project-kicker">Client Hospitality App</span>
+                                <h3 class="project-title">Fresh Bite Catering Web App</h3>
+                                <p class="project-desc">A clean, interactive catering web application featuring dynamic online food menus, booking reservation systems, and mobile-optimized galleries.</p>
+                                <div class="project-tech-tags">
+                                    <span class="tech-tag">HTML5</span>
+                                    <span class="tech-tag">CSS3</span>
+                                    <span class="tech-tag">JavaScript ES6</span>
+                                </div>
+                            </div>
+                            <div class="project-actions">
+                                <a href="javascript:void(0)" class="project-action-btn primary-action" data-case-study="freshbite">See Details <i class="ph ph-arrow-up-right"></i></a>
+                                <a href="https://waqarbytes.github.io/Fresh-Bite/" target="_blank" rel="noopener noreferrer" class="project-action-btn">Live Site <i class="ph ph-globe"></i></a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+        <!-- ======== END SELECTED PROJECTS SECTION ======== -->
+
+        <!-- ======== CASE STUDY MODAL / OVERLAY ======== -->
+        <div class="case-study-overlay" id="caseStudyOverlay" aria-hidden="true">
+            <div class="case-study-modal" id="caseStudyModal">
+                <button class="case-study-close" id="closeCaseStudyBtn" aria-label="Close Case Study">
+                    <i class="ph ph-x"></i>
+                </button>
+                <div id="caseStudyContent">
+                    <!-- Dynamic case study content loaded via JS -->
+                </div>
+            </div>
+        </div>
+        <!-- ======== END CASE STUDY MODAL ======== -->
+
+        <!-- ======== TECH STACK & TOOLS SECTION ======== -->
+        <section class="section-padding tech-stack-section" id="tech-stack">
+            <div class="site-container">
+                <div class="section-header center">
+                    <span class="section-eyebrow"><i class="ph ph-code"></i> Technical Toolkit</span>
+                    <h2 class="section-title">Tools &amp; Technologies <span class="text-gradient">I Build With</span></h2>
+                    <p class="section-subtitle">Proficient in modern programming languages, frontend frameworks, database engines, and AI toolsets.</p>
+                </div>
+
+                <div class="tech-categories-grid">
+                    <!-- Frontend -->
+                    <div class="tech-category-card">
+                        <h3><i class="ph ph-browsers"></i> Frontend</h3>
+                        <div class="tech-items-wrap">
+                            <div class="tech-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React"> React.js</div>
+                            <div class="tech-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt="Next.js"> Next.js</div>
+                            <div class="tech-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript"> TypeScript</div>
+                            <div class="tech-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript"> JavaScript</div>
+                            <div class="tech-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind"> Tailwind</div>
+                            <div class="tech-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg" alt="Redux"> Redux</div>
+                        </div>
+                    </div>
+
+                    <!-- Backend -->
+                    <div class="tech-category-card">
+                        <h3><i class="ph ph-hard-drives"></i> Backend &amp; DB</h3>
+                        <div class="tech-items-wrap">
+                            <div class="tech-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js"> Node.js</div>
+                            <div class="tech-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" alt="Express"> Express</div>
+                            <div class="tech-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"> Python</div>
+                            <div class="tech-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB"> MongoDB</div>
+                            <div class="tech-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg" alt="Supabase"> Supabase</div>
+                            <div class="tech-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL"> MySQL</div>
+                        </div>
+                    </div>
+
+                    <!-- AI & Machine Learning -->
+                    <div class="tech-category-card">
+                        <h3><i class="ph ph-cpu"></i> AI &amp; Vision</h3>
+                        <div class="tech-items-wrap">
+                            <div class="tech-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/opencv/opencv-original.svg" alt="OpenCV"> OpenCV</div>
+                            <div class="tech-item"><i class="ph ph-brain" style="color: var(--accent-lime);"></i> DeepFace</div>
+                            <div class="tech-item"><i class="ph ph-sparkle" style="color: var(--accent-cyan);"></i> Gemini AI</div>
+                            <div class="tech-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" alt="Flask"> Flask</div>
+                            <div class="tech-item"><i class="ph ph-waveform" style="color: var(--accent-lime);"></i> Librosa</div>
+                            <div class="tech-item"><i class="ph ph-robot" style="color: var(--accent-cyan);"></i> AI Agents</div>
+                        </div>
+                    </div>
+
+                    <!-- Cloud & Tools -->
+                    <div class="tech-category-card">
+                        <h3><i class="ph ph-cloud"></i> Tools &amp; Cloud</h3>
+                        <div class="tech-items-wrap">
+                            <div class="tech-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub"> GitHub</div>
+                            <div class="tech-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vercel/vercel-original.svg" alt="Vercel"> Vercel</div>
+                            <div class="tech-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker"> Docker</div>
+                            <div class="tech-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma"> Figma</div>
+                            <div class="tech-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code"> VS Code</div>
+                            <div class="tech-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux"> Linux</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Infinite Tech Ticker -->
+                <div class="tech-marquee-wrapper">
+                    <div class="tech-marquee-row">
+                        <div class="tech-pill-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React"> React.js</div>
+                        <div class="tech-pill-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt="Next.js"> Next.js</div>
+                        <div class="tech-pill-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript"> TypeScript</div>
+                        <div class="tech-pill-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js"> Node.js</div>
+                        <div class="tech-pill-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"> Python</div>
+                        <div class="tech-pill-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg" alt="Supabase"> Supabase</div>
+                        <div class="tech-pill-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/opencv/opencv-original.svg" alt="OpenCV"> OpenCV</div>
+                        <div class="tech-pill-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB"> MongoDB</div>
+                        <div class="tech-pill-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker"> Docker</div>
+                        <div class="tech-pill-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub"> GitHub CI/CD</div>
+                        <!-- Duplicate for smooth loop -->
+                        <div class="tech-pill-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React"> React.js</div>
+                        <div class="tech-pill-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt="Next.js"> Next.js</div>
+                        <div class="tech-pill-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript"> TypeScript</div>
+                        <div class="tech-pill-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js"> Node.js</div>
+                        <div class="tech-pill-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"> Python</div>
+                        <div class="tech-pill-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg" alt="Supabase"> Supabase</div>
+                        <div class="tech-pill-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/opencv/opencv-original.svg" alt="OpenCV"> OpenCV</div>
+                        <div class="tech-pill-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB"> MongoDB</div>
+                        <div class="tech-pill-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker"> Docker</div>
+                        <div class="tech-pill-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub"> GitHub CI/CD</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ======== END TECH STACK SECTION ======== -->
+
+        <!-- ======== EXPERIENCE & CAREER SECTION ======== -->
+        <section class="section-padding experience-section" id="experience">
+            <div class="site-container">
+                <div class="section-header center">
+                    <span class="section-eyebrow"><i class="ph ph-briefcase"></i> Track Record</span>
+                    <h2 class="section-title">Career &amp; <span class="text-gradient">Experience</span></h2>
+                    <p class="section-subtitle">Real-world production engineering across fintech, data engineering, and artificial intelligence startups.</p>
+                </div>
+
+                <div class="timeline-wrap">
+                    <!-- Node 1: Bluestock Fintech -->
+                    <div class="timeline-node">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card">
+                            <span class="timeline-date-badge">2025 · Full-Time Internship</span>
+                            <h3>Software Development Engineer Intern</h3>
+                            <span class="timeline-company">Bluestock Fintech</span>
+                            <p>Developed and optimized internal web tools, boosting operational throughput by ~15%. Strengthened code quality, modular architecture, and stability, reducing bug recurrence by 20% across cross-functional release cycles.</p>
+                        </div>
+                    </div>
+
+                    <!-- Node 2: International Data Solution -->
+                    <div class="timeline-node">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card">
+                            <span class="timeline-date-badge">2025 · Full-Time Internship</span>
+                            <h3>Web Development Intern</h3>
+                            <span class="timeline-company">International Data Solution</span>
+                            <p>Delivered 3+ production client applications in collaboration with UI and backend teams. Architected dynamic forms, secure JWT authentication flows, responsive layouts, and dashboard analytics.</p>
+                        </div>
+                    </div>
+
+                    <!-- Node 3: Next24Tech -->
+                    <div class="timeline-node">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card">
+                            <span class="timeline-date-badge">2024 · Full-Time Internship</span>
+                            <h3>AI / ML Development Intern</h3>
+                            <span class="timeline-company">Next24Tech</span>
+                            <p>Designed and benchmarked machine learning models achieving up to 85% accuracy. Automated data preprocessing pipelines, reducing manual transformation overhead by ~30% for production training workflows.</p>
+                        </div>
+                    </div>
+
+                    <!-- Node 4: Education -->
+                    <div class="timeline-node">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card">
+                            <span class="timeline-date-badge">2022 – 2026 · Academic</span>
+                            <h3>Bachelor of Technology (Computer Engineering)</h3>
+                            <span class="timeline-company">Baba Ghulam Shah Badshah University</span>
+                            <p>Pursuing comprehensive computer science and engineering coursework covering Data Structures &amp; Algorithms, OS, Distributed Systems, Computer Networks, and AI with a cumulative 9.10 CGPA.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ======== END EXPERIENCE SECTION ======== -->
+
+        <!-- ======== CERTIFICATIONS SECTION ======== -->
+        <section class="section-padding cert-section" id="certifications">
+            <div class="site-container">
+                <div class="section-header center">
+                    <span class="section-eyebrow"><i class="ph ph-certificate"></i> Credentials</span>
+                    <h2 class="section-title">Certifications &amp; <span class="text-gradient">Recognitions</span></h2>
+                </div>
+
+                <div class="cert-grid">
+                    <div class="cert-card">
+                        <div class="cert-icon"><i class="ph ph-cloud-check"></i></div>
+                        <div class="cert-info">
+                            <h3>Azure AI &amp; Cloud Fundamentals</h3>
+                            <p class="cert-issuer">IBM Training Program</p>
+                            <p class="cert-date">March 2026</p>
+                            <p class="cert-desc">Rigorous certification focused on cloud infrastructure, Azure AI Cognitive Services, machine learning deployment pipelines, and scalable enterprise cloud storage architectures.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ======== END CERTIFICATIONS SECTION ======== -->
+
+        <!-- ======== CONTACT & FOOTER SECTION ======== -->
+        <footer class="footer-section" id="contact">
+            <div class="site-container">
+                <div class="footer-top-grid">
+                    <!-- Left Contact Info -->
+                    <div>
+                        <span class="section-eyebrow"><i class="ph ph-paper-plane-tilt"></i> Get in Touch</span>
+                        <h2 class="footer-headline">Let’s create something <span>meaningful together.</span></h2>
+                        
+                        <div class="footer-contact-links">
+                            <a href="mailto:beingmohammedwaqar21@gmail.com" class="footer-contact-link-row">
+                                <i class="ph ph-envelope-simple"></i>
+                                <span>beingmohammedwaqar21@gmail.com</span>
+                            </a>
+                            <a href="tel:+916006092936" class="footer-contact-link-row">
+                                <i class="ph ph-phone-call"></i>
+                                <span>+91 60060 92936</span>
+                            </a>
+                            <div class="footer-contact-link-row" style="font-size: 1rem; color: var(--text-secondary);">
+                                <i class="ph ph-map-pin-line"></i>
+                                <span>Poonch, Jammu &amp; Kashmir, India</span>
+                            </div>
+                        </div>
+
+                        <div class="footer-profile-card">
+                            <img src="images/photo.jpeg" alt="Mohd Waqar" class="footer-profile-avatar">
+                            <div class="footer-profile-info">
+                                <h4>Mohd Waqar</h4>
+                                <p>Full-Stack Developer | AI &amp; Cloud</p>
+                                <div class="footer-social-row">
+                                    <a href="https://github.com/waqarbytes" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="GitHub"><i class="ph-bold ph-github-logo"></i></a>
+                                    <a href="https://www.linkedin.com/in/mohammed-waqar-156030217/" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="LinkedIn"><i class="ph-bold ph-linkedin-logo"></i></a>
+                                    <a href="https://twitter.com/waqarbytes" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="Twitter"><i class="ph-bold ph-x-logo"></i></a>
+                                    <a href="mailto:beingmohammedwaqar21@gmail.com" class="footer-social-btn" aria-label="Email"><i class="ph-bold ph-envelope"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Contact Form -->
+                    <div class="contact-form-card">
+                        <form id="contactForm" class="contact-form">
+                            <div class="form-group-row">
+                                <div class="form-field">
+                                    <input type="text" class="form-input" id="name" name="name" placeholder="Your Name" required>
+                                </div>
+                                <div class="form-field">
+                                    <input type="email" class="form-input" id="email" name="email" placeholder="Your Email" required>
+                                </div>
+                            </div>
+                            <div class="form-field">
+                                <input type="text" class="form-input" id="subject" name="subject" placeholder="Subject" required>
+                            </div>
+                            <div class="form-field">
+                                <textarea class="form-input" id="message" name="message" placeholder="Tell me about your project or opportunity..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn-magnetic btn-lime submit-btn" style="width: 100%;">
+                                <span>Send Message</span>
+                                <span class="btn-dot"></span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Footer Bottom Bar -->
+                <div class="footer-bottom-bar">
+                    <p class="footer-copyright">© 2026 Mohd Waqar. All rights reserved.</p>
+                    <div class="footer-bottom-nav">
+                        <a href="#home">Home</a>
+                        <a href="#about">About</a>
+                        <a href="#services">Services</a>
+                        <a href="#projects">Projects</a>
+                        <a href="#contact">Contact</a>
+                    </div>
+                    <a href="#home" class="back-to-top-circle" aria-label="Back to Top">
+                        <i class="ph ph-arrow-up"></i>
+                    </a>
+                </div>
+            </div>
+        </footer>
+        <!-- ======== END FOOTER SECTION ======== -->
+    </main>
+
+    <!-- ======== FLOATING WIDGETS ======== -->
+    <!-- WhatsApp Floating Action -->
     <a href="https://wa.me/916006092936?text=Hi%20Mohd%20Waqar%2C%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20connect!" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
-        <i class="fab fa-whatsapp"></i>
+        <i class="fa-brands fa-whatsapp"></i>
     </a>
 
-    <!-- ======== AI CHAT ASSISTANT ======== -->
-    <!-- Chat toggle button -->
+    <!-- AI Chat Assistant FAB -->
     <button class="chat-fab" id="chatBtn" aria-label="Open AI Assistant">
-        <i class="fas fa-robot chat-icon-open"></i>
-        <i class="fas fa-times chat-icon-close"></i>
-        <span class="chat-badge">AI</span>
+        <i class="ph-bold ph-robot chat-icon-open"></i>
+        <i class="ph-bold ph-x chat-icon-close"></i>
+        <span class="chat-fab-badge">AI</span>
     </button>
 
-    <!-- Chat panel -->
+    <!-- AI Chat Assistant Panel -->
     <div class="chat-panel" id="chatPanel">
         <div class="chat-header">
-            <div class="chat-header-left">
-                <div class="chat-avatar-lg">W</div>
-                <div>
-                    <p class="chat-header-name">Waqar's AI Assistant</p>
-                    <p class="chat-header-status"><span class="chat-online-dot"></span> Online</p>
+            <div class="chat-header-info">
+                <div class="chat-avatar">W</div>
+                <div class="chat-header-meta">
+                    <h4>Waqar's AI Assistant</h4>
+                    <span class="chat-status-dot">Online · Ready to Help</span>
                 </div>
             </div>
-            <button class="chat-close-btn" id="chatClose" aria-label="Close chat">
-                <i class="fas fa-times"></i>
+            <button class="chat-header-close" id="chatClose" aria-label="Close Chat">
+                <i class="ph ph-x"></i>
             </button>
         </div>
 
-        <div class="chat-body" id="chatBody"></div>
+        <div class="chat-body" id="chatBody">
+            <!-- Dynamic Messages -->
+        </div>
 
         <div class="chat-footer">
-            <input
-                type="text"
-                id="chatInput"
-                class="chat-input"
-                placeholder="Ask me about Waqar..."
-                autocomplete="off"
-                maxlength="500"
-            />
-            <button class="chat-send-btn" id="chatSend" aria-label="Send">
-                <i class="fas fa-paper-plane"></i>
+            <input type="text" id="chatInput" class="chat-input" placeholder="Ask about Waqar's skills, projects..." autocomplete="off">
+            <button class="chat-send-btn" id="chatSend" aria-label="Send message">
+                <i class="ph ph-paper-plane-right"></i>
             </button>
         </div>
     </div>
-    <!-- ======== END AI CHAT ASSISTANT ======== -->
 
+    <!-- Form Submission Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-icon"><i class="ph-bold ph-check-circle"></i></div>
+            <h3>Message Received!</h3>
+            <p>Thank you, <strong id="modalName" style="color: var(--accent-lime);"></strong>! I'll get back to you at <strong id="modalEmail" style="color:#fff;"></strong> shortly.</p>
+            <button class="btn-magnetic btn-lime" id="closeModalBtn" style="margin: 0 auto;">
+                <span>Awesome!</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- ======== SCRIPTS ======== -->
+    <script src="animations.js"></script>
     <script src="script.js"></script>
     <script src="contact.js"></script>
-    <script src="animations.js"></script>
     <script src="chatbot.js"></script>
 </body>
 
